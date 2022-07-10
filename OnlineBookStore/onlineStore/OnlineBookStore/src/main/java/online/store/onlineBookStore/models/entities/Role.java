@@ -11,7 +11,7 @@ public class Role extends BaseEntity{
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    private RoleEnum roles;
+    private RoleEnum name;
 
     @OneToMany(mappedBy = "role")
     private List<User> users;
@@ -21,12 +21,12 @@ public class Role extends BaseEntity{
 
     }
 
-    public RoleEnum getRoles() {
-        return roles;
+    public RoleEnum getName() {
+        return name;
     }
 
-    public Role setRoles(RoleEnum roles) {
-        this.roles = roles;
+    public Role setName(RoleEnum roles) {
+        this.name = roles;
         return this;
     }
 

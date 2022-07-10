@@ -1,9 +1,9 @@
 package online.store.onlineBookStore.models.entities;
 
-import online.store.onlineBookStore.models.enums.BookCategoryEnum;
 import online.store.onlineBookStore.models.enums.CoverTypeEnum;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -13,9 +13,6 @@ public class Book extends BaseEntity{
 
     @Column(nullable = false,unique = true)
     private String title;
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private BookCategoryEnum category;
 
     @Column(nullable = false)
     private LocalDate releaseDate;
@@ -23,20 +20,45 @@ public class Book extends BaseEntity{
     @Column(nullable = false)
     private String publisher;
 
+    @ManyToOne
+    private Category category;
+
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private CoverTypeEnum coverType;
 
     @Column(nullable = false)
-    private String pages;
+    private BigDecimal price;
 
     @Column(nullable = false,unique = true)
     private String isbn;
 
+    @Column(nullable = false)
+    private String authorName;
+
     @ManyToOne
-    private Author author;
+    private Order order;
 
     public Book() {
 
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public Book setPrice(BigDecimal price) {
+        this.price = price;
+        return this;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public Book setOrder(Order order) {
+        this.order = order;
+        return this;
     }
 
     public String getTitle() {
@@ -48,14 +70,6 @@ public class Book extends BaseEntity{
         return this;
     }
 
-    public BookCategoryEnum getCategory() {
-        return category;
-    }
-
-    public Book setCategory(BookCategoryEnum category) {
-        this.category = category;
-        return this;
-    }
 
     public LocalDate getReleaseDate() {
         return releaseDate;
@@ -84,14 +98,6 @@ public class Book extends BaseEntity{
         return this;
     }
 
-    public String getPages() {
-        return pages;
-    }
-
-    public Book setPages(String pages) {
-        this.pages = pages;
-        return this;
-    }
 
     public String getIsbn() {
         return isbn;
@@ -102,12 +108,21 @@ public class Book extends BaseEntity{
         return this;
     }
 
-    public Author getAuthor() {
-        return author;
+    public String getAuthorName() {
+        return authorName;
     }
 
-    public Book setAuthor(Author author) {
-        this.author = author;
+    public Book setAuthorName(String authorName) {
+        this.authorName = authorName;
+        return this;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public Book setCategory(Category category) {
+        this.category = category;
         return this;
     }
 }

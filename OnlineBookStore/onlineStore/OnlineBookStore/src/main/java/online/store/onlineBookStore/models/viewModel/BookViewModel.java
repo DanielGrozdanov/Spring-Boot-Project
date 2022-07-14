@@ -1,6 +1,7 @@
 package online.store.onlineBookStore.models.viewModel;
 
 
+import online.store.onlineBookStore.models.entities.Author;
 import online.store.onlineBookStore.models.entities.Category;
 import online.store.onlineBookStore.models.entities.Order;
 import online.store.onlineBookStore.models.enums.CoverTypeEnum;
@@ -11,11 +12,16 @@ import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Base64;
 import java.util.List;
 
 public class BookViewModel {
 
+    private Long id;
+
     private String title;
+
+    private String picture;
 
     private LocalDate releaseDate;
 
@@ -29,12 +35,21 @@ public class BookViewModel {
 
     private String isbn;
 
-    private String authorName;
+    private Author authorName;
 
     private List<Order> order;
 
     public BookViewModel() {
 
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public BookViewModel setId(Long id) {
+        this.id = id;
+        return this;
     }
 
     public String getTitle() {
@@ -52,6 +67,15 @@ public class BookViewModel {
 
     public BookViewModel setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
+        return this;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public BookViewModel setPicture(String picture) {
+        this.picture = picture;
         return this;
     }
 
@@ -100,11 +124,11 @@ public class BookViewModel {
         return this;
     }
 
-    public String getAuthorName() {
+    public Author getAuthorName() {
         return authorName;
     }
 
-    public BookViewModel setAuthorName(String authorName) {
+    public BookViewModel setAuthorName(Author authorName) {
         this.authorName = authorName;
         return this;
     }
@@ -116,5 +140,11 @@ public class BookViewModel {
     public BookViewModel setOrder(List<Order> order) {
         this.order = order;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return price + "€";
+
     }
 }

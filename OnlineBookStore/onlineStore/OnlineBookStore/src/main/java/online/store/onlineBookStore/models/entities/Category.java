@@ -18,7 +18,7 @@ public class Category extends BaseEntity{
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category",fetch = FetchType.EAGER)
     private Set<Book> book;
 
     public Category() {
@@ -63,5 +63,10 @@ public class Category extends BaseEntity{
     @Override
     public int hashCode() {
         return Objects.hash(book);
+    }
+
+    @Override
+    public String toString() {
+        return name.toString();
     }
 }

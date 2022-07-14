@@ -1,20 +1,19 @@
 package online.store.onlineBookStore.models.entities.dtos;
 
 
+import online.store.onlineBookStore.models.entities.Author;
 import online.store.onlineBookStore.models.enums.CoverTypeEnum;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class BookDTO {
 
+    private Long bookId;
 
     @NotBlank(message = "Title cannot be empty!")
     @Size(min = 3, message = "The title must be at least 3 characters!")
@@ -41,11 +40,21 @@ public class BookDTO {
     @NotBlank(message = "ISNB number cannot be empty!")
     private String isbn;
 
-    @NotBlank(message = "Author cannot be empty")
-    private String authorName;
+    @NotNull
+    @Min(1)
+    private Long authorId;
 
     public String getTitle() {
         return title;
+    }
+
+    public Long getBookId() {
+        return bookId;
+    }
+
+    public BookDTO setBookId(Long bookId) {
+        this.bookId = bookId;
+        return this;
     }
 
     public BookDTO setTitle(String title) {
@@ -107,13 +116,12 @@ public class BookDTO {
         return this;
     }
 
-    public String getAuthorName() {
-        return authorName;
+    public Long getAuthorId() {
+        return authorId;
     }
 
-    public BookDTO setAuthorName(String authorName) {
-        this.authorName = authorName;
+    public BookDTO setAuthorId(Long authorId) {
+        this.authorId = authorId;
         return this;
     }
-
 }

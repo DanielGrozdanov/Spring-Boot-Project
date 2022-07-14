@@ -24,9 +24,8 @@ public class CategoryService {
                 Category category = new Category();
                 category.setName(categoryEnum);
                 switch (categoryEnum){
-                    case Art -> category.setDescription("Art is eternal, " +
-                            "but life is short. You want to be reading the best books on art? Browse through our expert recommendations to find the best books on art" +
-                            "for your own library – or to give as a gift to an art lover.");
+                    case Romance -> category.setDescription("Romance novels are perhaps the most popular genre in terms of book sales." +
+                            "Romance novels are sold in grocery store checkout lines, in monthly shipments from publishers to readers, and online, as well as via self-publishing services.");
                     case Psychology-> category.setDescription("The best psychology books combine scientific rigour with accessible writing. " +
                             "We turned to some of the most eminent psychologists working today for their book recommendations.");
                     case Fantasy -> category.setDescription("Fantasy is a genre that uses magic and other supernatural forms as a primary element of plot, theme, and/or setting. " +

@@ -8,6 +8,7 @@ import online.store.onlineBookStore.models.enums.RoleEnum;
 import online.store.onlineBookStore.models.repositories.UserRepository;
 import online.store.onlineBookStore.models.viewModel.UserRegServiceModel;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -81,5 +82,9 @@ public class UserService {
         User user = this.modelMapper.map(userRegisterModel,User.class);
         user.setRole(this.roleService.findByName(RoleEnum.USER));
         return this.userRepository.save(user);
+    }
+
+    public User findByUsername(String username) {
+       return this.userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username + "was not found"));
     }
 }

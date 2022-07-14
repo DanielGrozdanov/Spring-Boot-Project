@@ -20,6 +20,9 @@ public class Book extends BaseEntity{
     @Column(nullable = false)
     private String publisher;
 
+    @Column(nullable = false)
+    public String picture;
+
     @ManyToOne
     private Category category;
 
@@ -30,11 +33,14 @@ public class Book extends BaseEntity{
     @Column(nullable = false)
     private BigDecimal price;
 
+    @Column(nullable = false)
+    private String pages;
+
     @Column(nullable = false,unique = true)
     private String isbn;
 
-    @Column(nullable = false)
-    private String authorName;
+    @ManyToOne
+    private Author author;
 
     @ManyToOne
     private Order order;
@@ -43,12 +49,30 @@ public class Book extends BaseEntity{
 
     }
 
+    public String getPicture() {
+        return picture;
+    }
+
+    public Book setPicture(String picture) {
+        this.picture = picture;
+        return this;
+    }
+
     public BigDecimal getPrice() {
         return price;
     }
 
     public Book setPrice(BigDecimal price) {
         this.price = price;
+        return this;
+    }
+
+    public String getPages() {
+        return pages;
+    }
+
+    public Book setPages(String pages) {
+        this.pages = pages;
         return this;
     }
 
@@ -108,12 +132,12 @@ public class Book extends BaseEntity{
         return this;
     }
 
-    public String getAuthorName() {
-        return authorName;
+    public Author getAuthor() {
+        return author;
     }
 
-    public Book setAuthorName(String authorName) {
-        this.authorName = authorName;
+    public Book setAuthor(Author author) {
+        this.author = author;
         return this;
     }
 

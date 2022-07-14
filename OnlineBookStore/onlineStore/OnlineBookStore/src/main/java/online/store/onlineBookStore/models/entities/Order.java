@@ -28,6 +28,9 @@ public class Order extends BaseEntity {
     @ManyToOne
     private Delivery delivery;
 
+    @Column(nullable = false)
+    private int copies;
+
     public Order() {
 
     }
@@ -83,6 +86,15 @@ public class Order extends BaseEntity {
 
     public Order setDelivery(Delivery delivery) {
         this.delivery = delivery;
+        return this;
+    }
+
+    public int getCopies() {
+        return copies;
+    }
+
+    public Order setCopies(int copies) {
+        this.copies = copies;
         return this;
     }
 }

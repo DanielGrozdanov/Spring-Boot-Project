@@ -21,24 +21,31 @@
             <ul class="navbar-nav mr-auto col-12 justify-content-between">
                 <th:block sec:authorize="isAuthenticated()">
                 <li class="nav-item" >
-                    <a class="nav-link" th:href="@{users/logout}">Logout</a>
+                    <form th:action="@{/users/logout}" th:method="post">
+                        <input class="btn btn-link nav-link" type="submit" value="Logout"> </form>
                 </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" th:href="@{/books/category/fantasy}">Fantasy</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" th:href="@{/books/category/horror}">Horror</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" th:href="@{/books/category/psychology}">Psychology</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" th:href="@{/books/category/romance}">Romance</a>
+                        </div>
+                    </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/orders/add}">Order</a>
+                    <a class="nav-link" th:href="@{/books/view/all}">All books</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/books/add}">Books</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/">Action</a>
-                        <a class="dropdown-item" href="/">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/">Something else here</a>
-                    </div>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/orders/add}">Order</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/users/profile}">Profile</a>
+                    </li>
                 </th:block>
 
                 <th:block sec:authorize="!isAuthenticated()">

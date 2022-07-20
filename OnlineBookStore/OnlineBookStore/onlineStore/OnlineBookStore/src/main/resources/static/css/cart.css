@@ -1,0 +1,14 @@
+.make-order{
+    margin-top: 52px;
+}
+
+.make-order-button{
+    display: block;
+    border: none;
+    width: 100%;
+    padding: 22px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    margin-left: 24px;
+}

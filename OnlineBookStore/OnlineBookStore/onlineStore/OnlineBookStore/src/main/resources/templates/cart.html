@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:include="~{fragments/header}"/>
+    <link rel="stylesheet" href="/css/cart.css"/>
+</head>
+<body>
+<div>
+    <nav th:replace="~{fragments/navigation}"></nav>
+</div>
+<main class="p-5 align-content-center bg-blur my-main">
+    <div class="make-order">
+    <button type="button" class="make-order-button"> Make Order</button>
+    </div>
+    <div class="row">
+        <div th:each="content : ${getCartContent}" th:object="${content}" class="book-container">
+            <div class="card mb-4 box-shadow book" style="top:20px">
+                <img th:src="*{book.picture}" th:id="*{book.id}" class="card-img-top" alt="Book Picture"
+                      data-holder-rendered="true"
+                     style="height: 386px; width: 100%; display: block;">
+                <div class="card-body">
+                    <div class="align-text-bottom">
+                        <div class="card-text border-bottom">
+                            <label for="title">Title:</label>
+                            <input disabled type="text" class="form-control" id="title" th:value="*{book.title}">
+                        </div>
+                        <div class="card-text border-bottom">
+                            <label for="price">Price :</label>
+                            <input disabled type="number" class="form-control" id="price" th:value="*{book.price}">
+                        </div>
+                        <div class="card-text border-bottom ">
+                            <label for="amount">Amount:</label>
+                            <input type="number" class="form-control" min="1" id="amount" th:value="*{amount}"
+                                   th:placeholder="*{amount}" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <a th:href="@{/books/cart/remove/{id}(id = *{id})}" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal"
+                           data-bs-target="#addModel">Remove From Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<th:block th:include="~{fragments/footer}"/>
+</body>
+</html>

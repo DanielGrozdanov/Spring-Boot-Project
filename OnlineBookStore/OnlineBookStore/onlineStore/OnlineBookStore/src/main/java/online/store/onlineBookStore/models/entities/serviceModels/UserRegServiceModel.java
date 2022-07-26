@@ -1,56 +1,43 @@
-package online.store.onlineBookStore.models.entities;
+package online.store.onlineBookStore.models.entities.serviceModels;
 
-
+import online.store.onlineBookStore.models.entities.Cart;
+import online.store.onlineBookStore.models.entities.Role;
 import online.store.onlineBookStore.models.enums.GenderEnum;
 
-import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
 
-@Entity
-@Table(name = "users")
-public class User extends BaseEntity{
+public class UserRegServiceModel {
 
-    @Column(nullable = false,unique = true)
+
     private String username;
 
-    @Column(nullable = false)
     private String firstName;
 
-    @Column(nullable = false)
     private String lastName;
 
-    @Column(nullable = false)
     private Integer age;
 
-    @Column(nullable = false,unique = true)
     private String email;
 
-    @Column(nullable = false)
     private String password;
 
-    @Enumerated(EnumType.STRING)
     private GenderEnum gender;
 
-    @Column(nullable = false)
     private String phoneNumber;
 
-    @ManyToOne
     private Role role;
 
-    @OneToMany
-    private Collection<Cart> cart;
+    private List<Cart> carts;
 
-    public User() {
+    public UserRegServiceModel() {
 
     }
-
 
     public String getUsername() {
         return username;
     }
 
-    public User setUsername(String username) {
+    public UserRegServiceModel setUsername(String username) {
         this.username = username;
         return this;
     }
@@ -59,7 +46,7 @@ public class User extends BaseEntity{
         return firstName;
     }
 
-    public User setFirstName(String firstName) {
+    public UserRegServiceModel setFirstName(String firstName) {
         this.firstName = firstName;
         return this;
     }
@@ -68,7 +55,7 @@ public class User extends BaseEntity{
         return lastName;
     }
 
-    public User setLastName(String lastName) {
+    public UserRegServiceModel setLastName(String lastName) {
         this.lastName = lastName;
         return this;
     }
@@ -77,7 +64,7 @@ public class User extends BaseEntity{
         return age;
     }
 
-    public User setAge(Integer age) {
+    public UserRegServiceModel setAge(Integer age) {
         this.age = age;
         return this;
     }
@@ -86,7 +73,7 @@ public class User extends BaseEntity{
         return email;
     }
 
-    public User setEmail(String email) {
+    public UserRegServiceModel setEmail(String email) {
         this.email = email;
         return this;
     }
@@ -95,7 +82,7 @@ public class User extends BaseEntity{
         return password;
     }
 
-    public User setPassword(String password) {
+    public UserRegServiceModel setPassword(String password) {
         this.password = password;
         return this;
     }
@@ -104,7 +91,7 @@ public class User extends BaseEntity{
         return gender;
     }
 
-    public User setGender(GenderEnum gender) {
+    public UserRegServiceModel setGender(GenderEnum gender) {
         this.gender = gender;
         return this;
     }
@@ -113,7 +100,7 @@ public class User extends BaseEntity{
         return phoneNumber;
     }
 
-    public User setPhoneNumber(String phoneNumber) {
+    public UserRegServiceModel setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
         return this;
     }
@@ -122,17 +109,17 @@ public class User extends BaseEntity{
         return role;
     }
 
-    public User setRole(Role role) {
+    public UserRegServiceModel setRole(Role role) {
         this.role = role;
         return this;
     }
 
-    public Collection<Cart> getCart() {
-        return cart;
+    public List<Cart> getOrders() {
+        return carts;
     }
 
-    public User setCart(Collection<Cart> cart) {
-        this.cart = cart;
+    public UserRegServiceModel setOrders(List<Cart> carts) {
+        this.carts = carts;
         return this;
     }
 }

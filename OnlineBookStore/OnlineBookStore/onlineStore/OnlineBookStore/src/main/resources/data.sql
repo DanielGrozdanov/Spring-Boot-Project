@@ -1,4 +1,7 @@
 
+
+
+
 /*
 INSERT INTO authors (id ,author_name)
 VALUES (1, 'George R. R. Martin'),
@@ -14,8 +17,8 @@ VALUES (1, 'George R. R. Martin'),
 
 
 
-
 /*
+
 INSERT INTO books (id, title, release_date, publisher, picture, category_id, cover_type, price, pages , isbn , author_id, stock)
 VALUES (1,'A Game of Thrones','1996/8/1','Voyager Books','https://i.ibb.co/ZxGchqG/gameofthrones.jpg',1,'Hard',19.99,'694','0002245841',1,10),
 (2,'The Fellowship of the Ring','1954/7/29','George Allen & Unwin','https://i.ibb.co/Pmt5mKB/fellowship.jpg',1,'Hard',24.99 ,'423','0345339703',2,5),
@@ -26,5 +29,12 @@ VALUES (1,'A Game of Thrones','1996/8/1','Voyager Books','https://i.ibb.co/ZxGch
 (7,'Against All Odds','2017/5/2','Delacorte Press','https://i.ibb.co/LYxXzq9/Against-All-Odds.jpg',3,'Soft',32.99,'354','9781101883938',7,13),
 (8,'It Ends with Us','2016/8/2','Atria Books','https://i.ibb.co/pbJPVZs/It-Endswith-Us.png',3,'Hard',24.99,'376','9781501110368',8,15);
 
-
 */
+
+
+
+
+
+
+
+

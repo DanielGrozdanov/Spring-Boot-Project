@@ -6,10 +6,12 @@ import online.store.onlineBookStore.models.entities.CartBooks;
 import online.store.onlineBookStore.models.repositories.CartBooksRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CartBookService {
 
-    private CartBooksRepository cartBooksRepository;
+    private final CartBooksRepository cartBooksRepository;
 
     public CartBookService(CartBooksRepository cartBooksRepository) {
         this.cartBooksRepository = cartBooksRepository;
@@ -23,4 +25,8 @@ public class CartBookService {
    public void removeById(Long id){
        this.cartBooksRepository.deleteById(id);
    }
+
+    public List<CartBooks> checkIfThereAreBooks() {
+        return this.cartBooksRepository.findAll();
+    }
 }

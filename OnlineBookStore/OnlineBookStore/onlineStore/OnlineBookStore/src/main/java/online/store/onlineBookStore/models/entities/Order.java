@@ -25,7 +25,8 @@ public class Order extends BaseEntity{
     private BigDecimal totalValue;
 
     @ManyToOne
-    private User user;
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    private User client;
 
     public Order() {
 
@@ -76,12 +77,12 @@ public class Order extends BaseEntity{
         return this;
     }
 
-    public User getUser() {
-        return user;
+    public User getClient() {
+        return client;
     }
 
-    public Order setUser(User user) {
-        this.user = user;
+    public Order setClient(User user) {
+        this.client = user;
         return this;
     }
 }

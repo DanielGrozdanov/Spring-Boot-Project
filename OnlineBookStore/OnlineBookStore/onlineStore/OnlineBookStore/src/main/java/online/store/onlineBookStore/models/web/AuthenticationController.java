@@ -2,12 +2,10 @@ package online.store.onlineBookStore.models.web;
 
 import online.store.onlineBookStore.models.entities.User;
 import online.store.onlineBookStore.models.entities.dtos.UserRegisterDTO;
-import online.store.onlineBookStore.models.user.OnlineBookStoreUserDetails;
-import online.store.onlineBookStore.models.viewModel.UserRegServiceModel;
+import online.store.onlineBookStore.models.entities.serviceModels.UserRegServiceModel;
 import online.store.onlineBookStore.models.services.UserService;
 import online.store.onlineBookStore.models.viewModel.UserViewModel;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

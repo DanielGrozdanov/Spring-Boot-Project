@@ -1,46 +1,25 @@
-package online.store.onlineBookStore.models.entities;
+package online.store.onlineBookStore.models.entities.serviceModels;
 
+import online.store.onlineBookStore.models.entities.CartBooks;
+import online.store.onlineBookStore.models.entities.Order;
 
-import javax.persistence.*;
 import java.util.List;
 
-@Entity
-@Table(name = "delivery")
-public class Delivery extends BaseEntity {
+public class DeliveryInfoServiceModel {
 
-    @Column(nullable = false)
+    private Long id;
     private String person;
-
-    @Column(nullable = false)
     private String country;
-
-    @Column(nullable = false)
     private String phone;
-
-    @Column(nullable = false)
     private String email;
-
-    @Column(nullable = false)
     private String city;
-
-    @Column(nullable = false)
     private String address;
-
-    @Column(nullable = false,name = "postal_code")
     private String postalCode;
-
-    @Column(nullable = false)
     private String courier;
-
-
-    @ManyToOne
-    @JoinColumn(name = "user_id",referencedColumnName = "id")
-    private User user;
-
-    @OneToMany
     private List<Order> orders;
 
-    public Delivery() {
+
+    public DeliveryInfoServiceModel() {
 
     }
 
@@ -48,9 +27,17 @@ public class Delivery extends BaseEntity {
         return orders;
     }
 
-
-    public Delivery setOrders(List<Order> orders) {
+    public DeliveryInfoServiceModel setOrders(List<Order> orders) {
         this.orders = orders;
+        return this;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public DeliveryInfoServiceModel setId(Long id) {
+        this.id = id;
         return this;
     }
 
@@ -58,7 +45,7 @@ public class Delivery extends BaseEntity {
         return person;
     }
 
-    public Delivery setPerson(String person) {
+    public DeliveryInfoServiceModel setPerson(String person) {
         this.person = person;
         return this;
     }
@@ -67,7 +54,7 @@ public class Delivery extends BaseEntity {
         return country;
     }
 
-    public Delivery setCountry(String country) {
+    public DeliveryInfoServiceModel setCountry(String country) {
         this.country = country;
         return this;
     }
@@ -76,7 +63,7 @@ public class Delivery extends BaseEntity {
         return phone;
     }
 
-    public Delivery setPhone(String phone) {
+    public DeliveryInfoServiceModel setPhone(String phone) {
         this.phone = phone;
         return this;
     }
@@ -85,7 +72,7 @@ public class Delivery extends BaseEntity {
         return email;
     }
 
-    public Delivery setEmail(String email) {
+    public DeliveryInfoServiceModel setEmail(String email) {
         this.email = email;
         return this;
     }
@@ -94,7 +81,7 @@ public class Delivery extends BaseEntity {
         return city;
     }
 
-    public Delivery setCity(String city) {
+    public DeliveryInfoServiceModel setCity(String city) {
         this.city = city;
         return this;
     }
@@ -103,7 +90,7 @@ public class Delivery extends BaseEntity {
         return address;
     }
 
-    public Delivery setAddress(String address) {
+    public DeliveryInfoServiceModel setAddress(String address) {
         this.address = address;
         return this;
     }
@@ -112,7 +99,7 @@ public class Delivery extends BaseEntity {
         return postalCode;
     }
 
-    public Delivery setPostalCode(String postalCode) {
+    public DeliveryInfoServiceModel setPostalCode(String postalCode) {
         this.postalCode = postalCode;
         return this;
     }
@@ -121,16 +108,7 @@ public class Delivery extends BaseEntity {
         return courier;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public Delivery setUser(User user) {
-        this.user = user;
-        return this;
-    }
-
-    public Delivery setCourier(String courier) {
+    public DeliveryInfoServiceModel setCourier(String courier) {
         this.courier = courier;
         return this;
     }

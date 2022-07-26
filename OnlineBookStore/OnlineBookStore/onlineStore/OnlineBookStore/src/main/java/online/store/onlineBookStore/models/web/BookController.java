@@ -93,12 +93,19 @@ public class BookController {
 
    @GetMapping("/cart/remove/{id}")
     public String removeBookFromCart(@PathVariable Long id){
-        this.cartBookService.removeById(id);
-        return "redirect:/books/cart";
+       List<CartBooks> cartBooks = this.cartBookService.checkIfThereAreBooks();
+       if (cartBooks != null){
+           this.cartBookService.removeById(id);
+       }
+       return "redirect:/books/cart";
     }
 
     @GetMapping("/cart")
     public String getCart(Principal principal , Model model) {
+        List<CartBooks> cartBooks = this.cartBookService.checkIfThereAreBooks();
+        if (cartBooks.size() == 0){
+            return "redirect:/books/view/all";
+        }
         String name = principal.getName();
         User loggedUser = this.userService.findByUsername(name);
         Cart cart = cartService.validateCart(loggedUser);
@@ -107,6 +114,7 @@ public class BookController {
         model.addAttribute("getCartContent",cartContent);
         return "cart";
     }
+
 
 
 

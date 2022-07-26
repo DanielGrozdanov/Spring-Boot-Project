@@ -20,14 +20,11 @@ public class PaymentMethodDTO {
     private String cvc;
 
     @NotBlank(message = "Field cannot be empty.")
-    private String expiryDate;
-
-    @NotBlank(message = "Field cannot be empty.")
-    private String expirationMonth;
+    private String expiryMonth;
 
     @NotNull(message = "Field cannot be empty.")
     @Min(value = 1,message = "Year cannot be less than 1")
-    private Integer expirationYear;
+    private Integer expiryYear;
 
     public PaymentMethodDTO() {
 
@@ -35,15 +32,6 @@ public class PaymentMethodDTO {
 
     public String getPaymentType() {
         return paymentType;
-    }
-
-    public String getCvc() {
-        return cvc;
-    }
-
-    public PaymentMethodDTO setCvc(String cvc) {
-        this.cvc = cvc;
-        return this;
     }
 
     public PaymentMethodDTO setPaymentType(String paymentType) {
@@ -55,44 +43,41 @@ public class PaymentMethodDTO {
         return cardNumber;
     }
 
-    public PaymentMethodDTO setCardNumber(String cardNumber) {
+    public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
-        return this;
     }
 
     public String getOwner() {
         return owner;
     }
 
-    public PaymentMethodDTO setOwner(String owner) {
+    public void setOwner(String owner) {
         this.owner = owner;
+    }
+
+    public String getCvc() {
+        return cvc;
+    }
+
+    public void setCvc(String cvc) {
+        this.cvc = cvc;
+    }
+
+    public String getExpiryMonth() {
+        return expiryMonth;
+    }
+
+    public PaymentMethodDTO setExpiryMonth(String expiryMonth) {
+        this.expiryMonth = expiryMonth;
         return this;
     }
 
-    public String getExpiryDate() {
-        return expiryDate;
+    public Integer getExpiryYear() {
+        return expiryYear;
     }
 
-    public PaymentMethodDTO setExpiryDate(String expiryDate) {
-        this.expiryDate = expiryDate;
-        return this;
-    }
-
-    public String getExpirationMonth() {
-        return expirationMonth;
-    }
-
-    public PaymentMethodDTO setExpirationMonth(String expirationMonth) {
-        this.expirationMonth = expirationMonth;
-        return this;
-    }
-
-    public Integer getExpirationYear() {
-        return expirationYear;
-    }
-
-    public PaymentMethodDTO setExpirationYear(Integer expirationYear) {
-        this.expirationYear = expirationYear;
+    public PaymentMethodDTO setExpiryYear(Integer expiryYear) {
+        this.expiryYear = expiryYear;
         return this;
     }
 }

@@ -9,9 +9,8 @@
     <nav th:replace="~{fragments/navigation}"></nav>
 </div>
 <main class="p-5 align-content-center bg-blur my-main">
-    <div class="make-order">
-    <button type="button" class="make-order-button"> Make Order</button>
-    </div>
+    <a href="/deliveries/delivery-information" class="make-order-button"> Create Order</a>
+    <a href="/books/view/all" class="make-order-button"> Continue Shopping</a>
     <div class="row">
         <div th:each="content : ${getCartContent}" th:object="${content}" class="book-container">
             <div class="card mb-4 box-shadow book" style="top:20px">
@@ -30,7 +29,7 @@
                         </div>
                         <div class="card-text border-bottom ">
                             <label for="amount">Amount:</label>
-                            <input type="number" class="form-control" min="1" id="amount" th:value="*{amount}"
+                            <input disabled type="number" class="form-control" min="1" id="amount" th:value="*{amount}"
                                    th:placeholder="*{amount}" autocomplete="off">
                         </div>
                     </div>
@@ -43,6 +42,5 @@
         </div>
     </div>
 </main>
-<th:block th:include="~{fragments/footer}"/>
 </body>
 </html>

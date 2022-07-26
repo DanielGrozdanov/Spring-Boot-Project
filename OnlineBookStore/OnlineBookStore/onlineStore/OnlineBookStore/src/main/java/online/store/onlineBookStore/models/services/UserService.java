@@ -6,7 +6,7 @@ import online.store.onlineBookStore.models.entities.dtos.UserRegisterDTO;
 import online.store.onlineBookStore.models.enums.GenderEnum;
 import online.store.onlineBookStore.models.enums.RoleEnum;
 import online.store.onlineBookStore.models.repositories.UserRepository;
-import online.store.onlineBookStore.models.viewModel.UserRegServiceModel;
+import online.store.onlineBookStore.models.entities.serviceModels.UserRegServiceModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;

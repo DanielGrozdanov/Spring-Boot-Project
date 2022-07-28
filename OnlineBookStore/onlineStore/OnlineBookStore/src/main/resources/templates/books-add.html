@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <th:block th:include="~{fragments/header}"/>
+</head>
+
+<body>
+
+<div>
+    <nav th:replace="~{fragments/navigation}"></nav>
+</div>
+
+<div class="container">
+    <h2 class="text-center text-white">Add Book</h2>
+    <form th:action="@{/admin/book-add}"
+          th:method="post"
+          th:object="${bookDTO}"
+          class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label for="title" class="text-white font-weight-bold">Title</label>
+                <input
+                        id="title"
+                        th:field="*{title}"
+                        th:errorclass="is-invalid"
+                        type="text"
+                        class="form-control"
+                        placeholder="Book Title"/>
+                <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
+                   class="invalid-feedback errors alert alert-danger">
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label for="releaseDate" class="text-white font-weight-bold">Release Date</label>
+                <input
+                        id="releaseDate"
+                        th:field="*{releaseDate}"
+                        th:errorclass="is-invalid"
+                        type="date"
+                        class="form-control"
+                        placeholder="Book release date"/>
+                <p th:if="${#fields.hasErrors('releaseDate')}" th:errors="*{releaseDate}"
+                   class="invalid-feedback errors alert alert-danger">
+                </p>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <label for="publisher" class="text-white font-weight-bold">Publisher</label>
+                <input
+                        id="publisher"
+                        th:field="*{publisher}"
+                        th:errorclass="is-invalid"
+                        type="text"
+                        class="form-control"
+                        placeholder="Publisher"/>
+                <p th:if="${#fields.hasErrors('publisher')}" th:errors="*{publisher}"
+                   class="invalid-feedback errors alert alert-danger">
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="text-white font-weight-bold" for="pictureUrl">Image URL</label>
+            <input
+                    id="pictureUrl"
+                    th:field="*{pictureUrl}"
+                    th:errorclass="is-invalid"
+                    type="url"
+                    class="form-control"
+                    placeholder="Book picture URL "/>
+            <p th:if="${#fields.hasErrors('pictureUrl')}" th:error="*{pictureUrl}"
+               class="invalid-feedback errors alert alert-danger">
+            </p>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <label class="text-center text-white font-weight-bold" for="category">Category</label>
+            <select id="category"
+                    name="category"
+                    th:field="*{category}"
+                    th:errorclass="is-invalid"
+                    class="form-control">
+                <option value="">- Select Book Category -</option>
+                <option th:each="cate :${T(online.store.onlineBookStore.models.enums.CategoryEnum).values()}"
+                        th:text="${cate}" th:value="${cate}"></option>
+            </select>
+            <p th:if="${#fields.hasErrors('category')}" th:error="*{category}"
+               class="invalid-feedback errors alert alert-danger">
+            </p>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <label class="text-center text-white font-weight-bold" for="coverType">Cover Type</label>
+            <select id="coverType"
+                    name="coverType"
+                    th:field="*{coverType}"
+                    th:errorclass="is-invalid"
+                    class="form-control">
+                <option value="">- Select Cover Type -</option>
+                <option th:each="cov :${T(online.store.onlineBookStore.models.enums.CoverTypeEnum).values()}"
+                        th:text="${cov}" th:value="${cov}"></option>
+            </select>
+            <p th:if="${#fields.hasErrors('coverType')}" th:error="*{coverType}"
+               class="invalid-feedback errors alert alert-danger">
+            </p>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <label for="price" class="text-white font-weight-bold">Book price</label>
+            <input
+                    id="price"
+                    th:field="*{price}"
+                    th:errorclass="is-invalid"
+                    type="number"
+                    min="1"
+                    step="any"
+                    class="form-control"
+                    placeholder="Suggested price"/>
+            <p th:if="${#fields.hasErrors('price')}" th:error="*{price}" class="invalid-feedback errors alert alert-danger">
+            </p>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <label for="pages" class="text-white font-weight-bold">Pages</label>
+            <input
+                    id="pages"
+                    th:field="*{pages}"
+                    th:errorclass="is-invalid"
+                    type="text"
+                    class="form-control"
+                    placeholder="Pages"/>
+            <p th:if="${#fields.hasErrors('pages')}" th:errors="*{pages}"
+               class="invalid-feedback errors alert alert-danger">
+            </p>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <label for="isbn" class="text-white font-weight-bold">ISBN</label>
+            <input
+                    id="isbn"
+                    th:field="*{isbn}"
+                    th:errorclass="is-invalid"
+                    type="text"
+                    class="form-control"
+                    placeholder="isbn"/>
+            <p th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"
+               class="invalid-feedback errors alert alert-danger">
+            </p>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <label for="stock" class="text-white font-weight-bold">Stock</label>
+            <input
+                    id="stock"
+                    th:field="*{stock}"
+                    th:errorclass="is-invalid"
+                    type="number"
+                    class="form-control"
+                    placeholder="Stock"/>
+            <p th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"
+               class="invalid-feedback errors alert alert-danger">
+            </p>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <label for="author" class="text-white font-weight-bold">Author</label>
+            <input
+                    id="author"
+                    th:field="*{author.authorName}"
+                    th:errorclass="is-invalid"
+                    type="text"
+                    class="form-control"
+                    placeholder="Author"/>
+            <p th:if="${#fields.hasErrors('author.authorName')}" th:errors="*{author.authorName}"
+               class="invalid-feedback errors alert alert-danger">
+            </p>
+        </div>
+        <div class="row">
+            <div class="col col-md-4">
+                <div class="button-holder d-flex">
+                    <input type="submit" class="btn btn-info btn-lg" value="Add"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div>
+    <footer></footer>
+</div>
+
+</body>
+</html>

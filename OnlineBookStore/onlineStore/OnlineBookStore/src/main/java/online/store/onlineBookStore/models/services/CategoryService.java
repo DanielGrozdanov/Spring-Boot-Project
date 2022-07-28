@@ -38,4 +38,8 @@ public class CategoryService {
             });
         }
     }
+
+    public Category getCategory(CategoryEnum category) {
+     return this.categoryRepository.findByName(category);
+    }
 }

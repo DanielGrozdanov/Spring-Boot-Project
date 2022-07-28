@@ -1,5 +1,6 @@
 package online.store.onlineBookStore.models.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -9,6 +10,7 @@ import java.util.Set;
 @Table(name = "authors")
 public class Author extends BaseEntity{
 
+    @Column(nullable = false)
     private String authorName;
 
     @OneToMany

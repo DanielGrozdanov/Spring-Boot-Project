@@ -8,18 +8,19 @@ import java.util.Collection;
 public class OnlineBookStoreUserDetails implements UserDetails {
 
 
+    private final Long id;
     private final String username;
     private final String firstName;
     private final String lastName;
     private final String password;
     private final Collection<GrantedAuthority> authorities;
 
-    public OnlineBookStoreUserDetails(String username,
+    public OnlineBookStoreUserDetails(Long id, String username,
                                       String firstName,
                                       String lastName,
                                       String password,
                                       Collection<GrantedAuthority> authorities) {
-
+        this.id = id;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;

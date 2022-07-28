@@ -38,4 +38,5 @@ public class Role extends BaseEntity{
         this.users = users;
         return this;
     }
+
 }

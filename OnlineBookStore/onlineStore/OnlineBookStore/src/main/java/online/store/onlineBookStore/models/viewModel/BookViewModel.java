@@ -3,17 +3,11 @@ package online.store.onlineBookStore.models.viewModel;
 
 import online.store.onlineBookStore.models.entities.Author;
 import online.store.onlineBookStore.models.entities.Category;
-import online.store.onlineBookStore.models.entities.Order;
 import online.store.onlineBookStore.models.enums.CoverTypeEnum;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Base64;
-import java.util.List;
 
 public class BookViewModel {
 
@@ -21,7 +15,7 @@ public class BookViewModel {
 
     private String title;
 
-    private String picture;
+    private String pictureUrl;
 
     private LocalDate releaseDate;
 
@@ -37,7 +31,6 @@ public class BookViewModel {
 
     private Author authorName;
 
-    private List<Order> order;
 
     public BookViewModel() {
 
@@ -61,21 +54,21 @@ public class BookViewModel {
         return this;
     }
 
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public BookViewModel setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
+        return this;
+    }
+
     public LocalDate getReleaseDate() {
         return releaseDate;
     }
 
     public BookViewModel setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
-        return this;
-    }
-
-    public String getPicture() {
-        return picture;
-    }
-
-    public BookViewModel setPicture(String picture) {
-        this.picture = picture;
         return this;
     }
 
@@ -131,20 +124,5 @@ public class BookViewModel {
     public BookViewModel setAuthorName(Author authorName) {
         this.authorName = authorName;
         return this;
-    }
-
-    public List<Order> getOrder() {
-        return order;
-    }
-
-    public BookViewModel setOrder(List<Order> order) {
-        this.order = order;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return price + "€";
-
     }
 }

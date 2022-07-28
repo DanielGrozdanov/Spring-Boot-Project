@@ -1,7 +1,7 @@
 package online.store.onlineBookStore.models.entities.dtos;
 
 
-import online.store.onlineBookStore.models.entities.Author;
+import online.store.onlineBookStore.models.enums.CategoryEnum;
 import online.store.onlineBookStore.models.enums.CoverTypeEnum;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -19,33 +19,42 @@ public class BookDTO {
     @Size(min = 3, message = "The title must be at least 3 characters!")
     private String title;
 
-    @NotNull(message = "Price cannot be empty!")
-    @Positive(message = "Price must be a positive number!")
-    private BigDecimal price;
-
-    @NotNull(message = "Category cannot be empty!")
-    private Long categoryId;
-
-    @Enumerated(EnumType.STRING)
-    @NotNull(message = "Select a cover type.")
-    private CoverTypeEnum coverType;
-
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotBlank(message = "Release date cannot be empty!")
+    @NotNull (message = "Release date cannot be empty!")
     private LocalDate releaseDate;
 
     @NotBlank(message = "Publisher cannot be empty!")
     private String publisher;
 
-    @NotBlank(message = "ISNB number cannot be empty!")
+    @NotBlank(message = "Must provide a picture URL!")
+    private String pictureUrl;
+
+    @NotNull(message = "Category cannot be empty!")
+    private CategoryEnum category;
+
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "Select a cover type!")
+    private CoverTypeEnum coverType;
+
+    @NotNull(message = "Price cannot be empty!")
+    @Positive(message = "Price must be a positive number!")
+    private BigDecimal price;
+
+    @NotBlank(message = "Pages field cannot be empty!")
+    private String pages;
+
+    @NotBlank(message = "ISNB field cannot be empty!")
     private String isbn;
 
-    @NotNull
+    @NotNull(message = "Stock field cannot be empty!")
     @Min(1)
-    private Long authorId;
+    private Integer stock;
 
-    public String getTitle() {
-        return title;
+    @NotNull(message = "Author field cannot be empty!")
+    private AuthorDTO author;
+
+    public BookDTO() {
+
     }
 
     public Long getBookId() {
@@ -57,35 +66,12 @@ public class BookDTO {
         return this;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public BookDTO setTitle(String title) {
         this.title = title;
-        return this;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public BookDTO setPrice(BigDecimal price) {
-        this.price = price;
-        return this;
-    }
-
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public BookDTO setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
-        return this;
-    }
-
-    public CoverTypeEnum getCoverType() {
-        return coverType;
-    }
-
-    public BookDTO setCoverType(CoverTypeEnum coverType) {
-        this.coverType = coverType;
         return this;
     }
 
@@ -107,6 +93,51 @@ public class BookDTO {
         return this;
     }
 
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public BookDTO setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
+        return this;
+    }
+
+    public CategoryEnum getCategory() {
+        return category;
+    }
+
+    public BookDTO setCategory(CategoryEnum category) {
+        this.category = category;
+        return this;
+    }
+
+    public CoverTypeEnum getCoverType() {
+        return coverType;
+    }
+
+    public BookDTO setCoverType(CoverTypeEnum coverType) {
+        this.coverType = coverType;
+        return this;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public BookDTO setPrice(BigDecimal price) {
+        this.price = price;
+        return this;
+    }
+
+    public String getPages() {
+        return pages;
+    }
+
+    public BookDTO setPages(String pages) {
+        this.pages = pages;
+        return this;
+    }
+
     public String getIsbn() {
         return isbn;
     }
@@ -116,12 +147,21 @@ public class BookDTO {
         return this;
     }
 
-    public Long getAuthorId() {
-        return authorId;
+    public Integer getStock() {
+        return stock;
     }
 
-    public BookDTO setAuthorId(Long authorId) {
-        this.authorId = authorId;
+    public BookDTO setStock(Integer stock) {
+        this.stock = stock;
+        return this;
+    }
+
+    public AuthorDTO getAuthor() {
+        return author;
+    }
+
+    public BookDTO setAuthor(AuthorDTO author) {
+        this.author = author;
         return this;
     }
 }

@@ -2,35 +2,45 @@ package online.store.onlineBookStore.models.web;
 
 
 import online.store.onlineBookStore.models.entities.Book;
+import online.store.onlineBookStore.models.entities.Cart;
+import online.store.onlineBookStore.models.entities.CartBooks;
+import online.store.onlineBookStore.models.entities.User;
 import online.store.onlineBookStore.models.enums.CategoryEnum;
 import online.store.onlineBookStore.models.services.BookService;
+import online.store.onlineBookStore.models.services.CartBookService;
+import online.store.onlineBookStore.models.services.CartService;
 import online.store.onlineBookStore.models.services.UserService;
-import online.store.onlineBookStore.models.utility.ShopCartEntity;
-import online.store.onlineBookStore.models.utility.ShopCart;
+import online.store.onlineBookStore.models.user.OnlineBookStoreUserDetails;
 import online.store.onlineBookStore.models.viewModel.BookViewModel;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 @RequestMapping("/books")
 public class BookController {
+
     private final BookService bookService;
     private final UserService userService;
-    private final ShopCart shopCart;
+    private final ModelMapper modelMapper;
+    private final CartService cartService;
+    private final CartBookService cartBookService;
+
+
 
     @Autowired
-    public BookController(BookService bookService, UserService userService, ShopCart shopCart) {
+    public BookController(BookService bookService, UserService userService, ModelMapper modelMapper, CartService cartService, CartBookService cartBookService) {
         this.bookService = bookService;
         this.userService = userService;
-        this.shopCart = shopCart;
+        this.modelMapper = modelMapper;
+        this.cartService = cartService;
+        this.cartBookService = cartBookService;
     }
 
     @GetMapping("")
@@ -50,13 +60,74 @@ public class BookController {
         return "books";
     }
 
-    @PostMapping("/view/all/{id}")
-    public String addBooksToCart(@PathVariable("id") Long id) {
-        Book chosenBook = bookService.findBookById(id);
-        ShopCartEntity cart = fillShopCartData(chosenBook);
-        this.shopCart.getItems().add(cart);
-        return "index"; //TODO : must finish Shopping Cart and Payments/Order contrroler
+    @GetMapping("/cart/{id}")
+    public String addBookToCart(@PathVariable("id") Long bookId, Principal principal) {  //TODO : can use @AuthenticationPrincipal OnlineBookStoreUserDetails userDetails - getID
+
+        String user = principal.getName();
+        User loggedUser = this.userService.findByUsername(user);
+        Cart cart = cartService.validateCart(loggedUser);
+        Book book = bookService.findBookById(bookId);
+
+        if (cart == null) {
+            Cart newCart = new Cart();
+            newCart.setUser(loggedUser);
+            CartBooks cartBooks = new CartBooks();
+            cartBooks.setCart(newCart);
+            cartBooks.setBook(book);
+            this.cartService.saveCart(cartBooks, newCart);
+        } else {
+            CartBooks bookInCart = cartBookService.findBookInCart(book, cart);
+            if (bookInCart == null) {
+                CartBooks cartBooks = new CartBooks();
+                cartBooks.setCart(cart);
+                cartBooks.setBook(book);
+                this.cartService.saveCart(cartBooks, cart);
+            } else {
+                bookInCart.setAmount(bookInCart.getAmount() + 1);
+                this.cartService.updateAmount(bookInCart);
+            }
+        }
+
+        return "redirect:/books/cart";
     }
+
+   @GetMapping("/cart/remove/{id}")
+    public String removeBookFromCart(@PathVariable Long id){
+       List<CartBooks> cartBooks = this.cartBookService.checkIfThereAreBooks();
+       if (cartBooks != null){
+           this.cartBookService.removeById(id);
+       }
+       return "redirect:/books/cart";
+    }
+
+    @GetMapping("/cart")
+    public String getCart(Principal principal , Model model) {
+        List<CartBooks> cartBooks = this.cartBookService.checkIfThereAreBooks();
+        if (cartBooks.size() == 0){
+            return "redirect:/books/view/all";
+        }
+        String name = principal.getName();
+        User loggedUser = this.userService.findByUsername(name);
+        Cart cart = cartService.validateCart(loggedUser);
+        List<CartBooks> cartContent = cartService.findCartContent(cart.getId());
+
+        model.addAttribute("getCartContent",cartContent);
+        return "cart";
+    }
+
+
+
+
+    @ModelAttribute("viewAllBooks")
+    public BookViewModel bookById() {
+        return new BookViewModel();
+    }
+
+    @ModelAttribute("getCartContent")
+    public CartBooks viewCartBooks(){
+        return new CartBooks();
+    }
+
 
     @GetMapping("/category/fantasy")
     public String getBooksByCategoryFantasy(Model model) {
@@ -86,11 +157,5 @@ public class BookController {
         return "books-category-romance";
     }
 
-    private ShopCartEntity fillShopCartData(Book book) {
-        ShopCartEntity cart = new ShopCartEntity();
-        cart.setBook(book);
-        cart.setCost(book.getPrice());
-        return cart;
-    }
 }
 

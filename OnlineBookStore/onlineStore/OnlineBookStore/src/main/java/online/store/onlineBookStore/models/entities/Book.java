@@ -3,15 +3,15 @@ package online.store.onlineBookStore.models.entities;
 import online.store.onlineBookStore.models.enums.CoverTypeEnum;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "books")
-public class Book extends BaseEntity{
+public class Book extends BaseEntity {
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private String title;
 
     @Column(nullable = false)
@@ -21,7 +21,7 @@ public class Book extends BaseEntity{
     private String publisher;
 
     @Column(nullable = false)
-    public String picture;
+    public String pictureUrl;
 
     @ManyToOne
     private Category category;
@@ -36,25 +36,75 @@ public class Book extends BaseEntity{
     @Column(nullable = false)
     private String pages;
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private String isbn;
+
+    @Column(nullable = false)
+    private Integer stock;
 
     @ManyToOne
     private Author author;
 
-    @ManyToOne
-    private Order order;
+
+    @OneToMany(mappedBy = "book",cascade = CascadeType.ALL)
+    private Set<CartBooks> books;
+
 
     public Book() {
 
     }
 
-    public String getPicture() {
-        return picture;
+    public String getTitle() {
+        return title;
     }
 
-    public Book setPicture(String picture) {
-        this.picture = picture;
+    public Book setTitle(String title) {
+        this.title = title;
+        return this;
+    }
+
+    public LocalDate getReleaseDate() {
+        return releaseDate;
+    }
+
+    public Book setReleaseDate(LocalDate releaseDate) {
+        this.releaseDate = releaseDate;
+        return this;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public Book setPublisher(String publisher) {
+        this.publisher = publisher;
+        return this;
+    }
+
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public Book setPictureUrl(String picture) {
+        this.pictureUrl = picture;
+        return this;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public Book setCategory(Category category) {
+        this.category = category;
+        return this;
+    }
+
+    public CoverTypeEnum getCoverType() {
+        return coverType;
+    }
+
+    public Book setCoverType(CoverTypeEnum coverType) {
+        this.coverType = coverType;
         return this;
     }
 
@@ -76,59 +126,21 @@ public class Book extends BaseEntity{
         return this;
     }
 
-    public Order getOrder() {
-        return order;
-    }
-
-    public Book setOrder(Order order) {
-        this.order = order;
-        return this;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public Book setTitle(String title) {
-        this.title = title;
-        return this;
-    }
-
-
-    public LocalDate getReleaseDate() {
-        return releaseDate;
-    }
-
-    public Book setReleaseDate(LocalDate releaseDate) {
-        this.releaseDate = releaseDate;
-        return this;
-    }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public Book setPublisher(String publisher) {
-        this.publisher = publisher;
-        return this;
-    }
-
-    public CoverTypeEnum getCoverType() {
-        return coverType;
-    }
-
-    public Book setCoverType(CoverTypeEnum coverType) {
-        this.coverType = coverType;
-        return this;
-    }
-
-
     public String getIsbn() {
         return isbn;
     }
 
     public Book setIsbn(String isbn) {
         this.isbn = isbn;
+        return this;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public Book setStock(Integer stock) {
+        this.stock = stock;
         return this;
     }
 
@@ -141,12 +153,12 @@ public class Book extends BaseEntity{
         return this;
     }
 
-    public Category getCategory() {
-        return category;
+    public Set<CartBooks> getBooks() {
+        return books;
     }
 
-    public Book setCategory(Category category) {
-        this.category = category;
+    public Book setBooks(Set<CartBooks> books) {
+        this.books = books;
         return this;
     }
 }

@@ -1,34 +1,41 @@
 package online.store.onlineBookStore.models.entities;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+
 
 @Entity
 @Table(name = "payment_methods")
 public class PaymentMethod extends BaseEntity{
 
-    @Column(nullable = false,name = "payment_type")
+    @Column(name = "payment_type")
     private String paymentType;
 
     @Column(nullable = false,name = "card_number")
     private String cardNumber;
 
-    @Column(nullable = false,name = "expiry_date")
-    private LocalDate expiryDate;
+    @Column(nullable = false,name = "expiration_month")
+    private String expiryMonth;
+
+    @Column(nullable = false,name = "expiration_year")
+    private Integer expiryYear;
+
 
     @Column(nullable = false)
-    private String cardOwner;
+    private String owner;
 
     @Column(nullable = false)
     private String cvc;
 
     @OneToMany
-    private List<Order> orders;
+    private List<Order> order;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    private User user;
+
 
     public PaymentMethod() {
 
@@ -52,21 +59,28 @@ public class PaymentMethod extends BaseEntity{
         return this;
     }
 
-    public LocalDate getExpiryDate() {
-        return expiryDate;
+    public String getExpiryMonth() {
+        return expiryMonth;
     }
 
-    public PaymentMethod setExpiryDate(LocalDate expiryDate) {
-        this.expiryDate = expiryDate;
-        return this;
+    public void setExpiryMonth(String expiryMonth) {
+        this.expiryMonth = expiryMonth;
     }
 
-    public String getCardOwner() {
-        return cardOwner;
+    public Integer getExpiryYear() {
+        return expiryYear;
     }
 
-    public PaymentMethod setCardOwner(String cardOwner) {
-        this.cardOwner = cardOwner;
+    public void setExpiryYear(Integer expiryYear) {
+        this.expiryYear = expiryYear;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public PaymentMethod setOwner(String owner) {
+        this.owner = owner;
         return this;
     }
 
@@ -79,13 +93,21 @@ public class PaymentMethod extends BaseEntity{
         return this;
     }
 
-    public List<Order> getOrders() {
-        return orders;
+    public List<Order> getOrder() {
+        return order;
     }
 
-    public PaymentMethod setOrders(List<Order> orders) {
-        this.orders = orders;
+    public PaymentMethod setOrder(List<Order> order) {
+        this.order = order;
         return this;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public PaymentMethod setUser(User user) {
+        this.user = user;
+        return this;
+    }
 }

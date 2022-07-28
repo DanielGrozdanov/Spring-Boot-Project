@@ -4,6 +4,8 @@ package online.store.onlineBookStore.models.entities;
 import online.store.onlineBookStore.models.enums.GenderEnum;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -36,9 +38,13 @@ public class User extends BaseEntity{
     @ManyToOne
     private Role role;
 
+    @OneToMany
+    private Collection<Cart> cart;
+
     public User() {
 
     }
+
 
     public String getUsername() {
         return username;
@@ -118,6 +124,15 @@ public class User extends BaseEntity{
 
     public User setRole(Role role) {
         this.role = role;
+        return this;
+    }
+
+    public Collection<Cart> getCart() {
+        return cart;
+    }
+
+    public User setCart(Collection<Cart> cart) {
+        this.cart = cart;
         return this;
     }
 }

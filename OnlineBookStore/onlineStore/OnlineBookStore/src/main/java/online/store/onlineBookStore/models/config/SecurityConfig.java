@@ -1,6 +1,7 @@
 package online.store.onlineBookStore.models.config;
 
 
+import online.store.onlineBookStore.models.enums.RoleEnum;
 import online.store.onlineBookStore.models.repositories.UserRepository;
 import online.store.onlineBookStore.models.services.OnlineBookStoreDetailsService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -30,6 +31,7 @@ public class SecurityConfig {
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/users/login", "/users/register").anonymous()
+                .antMatchers("/admin/**").hasRole(RoleEnum.ADMIN.name())
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -38,7 +40,7 @@ public class SecurityConfig {
                 .usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
                 .passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY)
                 .defaultSuccessUrl("/")
-                .failureForwardUrl("/users/login-error").
+                .failureForwardUrl("/users/login-failed").
                 and()
                 .logout()
                 .logoutUrl("/users/logout")

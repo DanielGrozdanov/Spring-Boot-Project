@@ -1,5 +1,6 @@
 package online.store.onlineBookStore.models.viewModel;
 
+import online.store.onlineBookStore.models.entities.Role;
 import online.store.onlineBookStore.models.enums.GenderEnum;
 
 import javax.persistence.Column;
@@ -7,6 +8,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 public class UserViewModel {
+
+    private Long id;
 
     private String username;
 
@@ -21,6 +24,8 @@ public class UserViewModel {
     private GenderEnum gender;
 
     private String phoneNumber;
+
+    private Role role;
 
     public UserViewModel() {
 
@@ -40,8 +45,26 @@ public class UserViewModel {
         return username;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public UserViewModel setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
     public UserViewModel setUsername(String username) {
         this.username = username;
+        return this;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public UserViewModel setRole(Role role) {
+        this.role = role;
         return this;
     }
 

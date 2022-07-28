@@ -1,6 +1,5 @@
 package online.store.onlineBookStore.models.services;
 
-import online.store.onlineBookStore.models.entities.Role;
 import online.store.onlineBookStore.models.entities.User;
 import online.store.onlineBookStore.models.repositories.UserRepository;
 import online.store.onlineBookStore.models.user.OnlineBookStoreUserDetails;
@@ -33,10 +32,11 @@ public class OnlineBookStoreDetailsService implements UserDetailsService {
        }
     }
 
-    private UserDetails userRoleMap(User user){
+    public UserDetails userRoleMap(User user){
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         return new OnlineBookStoreUserDetails(
+                user.getId(),
                 user.getUsername(),
                 user.getFirstName(),
                 user.getLastName(),
@@ -44,10 +44,11 @@ public class OnlineBookStoreDetailsService implements UserDetailsService {
                 grantedAuthorities
         );
     }
-    private UserDetails adminRoleMap(User user) {
+    public UserDetails adminRoleMap(User user) {
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         return new OnlineBookStoreUserDetails(
+                user.getId(),
                 user.getUsername(),
                 user.getFirstName(),
                 user.getLastName(),

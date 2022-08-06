@@ -1,9 +1,0 @@
-.book{
-    border-bottom: 1px solid white;
-    margin-top: 50px;
-    margin-right: 15px;
-    width: 280px;
-}
-.book-container{
-    display: flex;
-}

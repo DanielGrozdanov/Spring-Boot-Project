@@ -2,10 +2,6 @@ package online.store.onlineBookStore.models.entities;
 
 
 import javax.persistence.*;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,10 +13,8 @@ public class Cart extends BaseEntity {
 
     private String status = "open";
 
-    @OneToMany(mappedBy = "cart",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cart",cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     private Set<CartBooks> cart;
-
-
 
     public Cart() {
 

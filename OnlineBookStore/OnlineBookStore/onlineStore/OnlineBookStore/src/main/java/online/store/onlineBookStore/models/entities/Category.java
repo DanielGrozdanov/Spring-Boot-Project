@@ -1,6 +1,6 @@
 package online.store.onlineBookStore.models.entities;
 
-import online.store.onlineBookStore.models.enums.CategoryEnum;
+import online.store.onlineBookStore.enums.CategoryEnum;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -12,7 +12,7 @@ public class Category extends BaseEntity{
 
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false)
     private CategoryEnum name;
 
     @Column(columnDefinition = "TEXT")

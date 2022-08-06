@@ -1,11 +1,10 @@
 package online.store.onlineBookStore.models.entities;
 
-import online.store.onlineBookStore.models.enums.CoverTypeEnum;
+import online.store.onlineBookStore.enums.CoverTypeEnum;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -22,7 +21,7 @@ public class Book extends BaseEntity {
     private String publisher;
 
     @Column(nullable = false)
-    public String picture;
+    public String pictureUrl;
 
     @ManyToOne
     private Category category;
@@ -82,12 +81,12 @@ public class Book extends BaseEntity {
         return this;
     }
 
-    public String getPicture() {
-        return picture;
+    public String getPictureUrl() {
+        return pictureUrl;
     }
 
-    public Book setPicture(String picture) {
-        this.picture = picture;
+    public Book setPictureUrl(String picture) {
+        this.pictureUrl = picture;
         return this;
     }
 

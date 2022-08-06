@@ -146,7 +146,7 @@
                         class="form-control"
                         placeholder="Gender">
                 <option value="" selected>Gender</option>
-                <option th:each="gr :${T(online.store.onlineBookStore.models.enums.GenderEnum).values()}"
+                <option th:each="gr :${T(online.store.onlineBookStore.enums.GenderEnum).values()}"
                 th:text="${gr}" th:value="${gr}"></option>
                 </select>
 

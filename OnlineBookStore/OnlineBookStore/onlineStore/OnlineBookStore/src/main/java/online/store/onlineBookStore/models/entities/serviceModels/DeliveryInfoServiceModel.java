@@ -1,6 +1,5 @@
 package online.store.onlineBookStore.models.entities.serviceModels;
 
-import online.store.onlineBookStore.models.entities.CartBooks;
 import online.store.onlineBookStore.models.entities.Order;
 
 import java.util.List;

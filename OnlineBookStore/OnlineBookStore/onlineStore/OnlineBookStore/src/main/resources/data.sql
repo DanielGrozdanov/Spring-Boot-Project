@@ -1,8 +1,6 @@
 
-
-
-
 /*
+
 INSERT INTO authors (id ,author_name)
 VALUES (1, 'George R. R. Martin'),
 (2, 'J. R. R. Tolkien'),
@@ -13,13 +11,8 @@ VALUES (1, 'George R. R. Martin'),
 (7, 'Danielle Steel'),
 (8, 'Nora Roberts');
 
-*/
 
-
-
-/*
-
-INSERT INTO books (id, title, release_date, publisher, picture, category_id, cover_type, price, pages , isbn , author_id, stock)
+INSERT INTO books (id, title, release_date, publisher, picture_url, category_id, cover_type, price, pages , isbn , author_id, stock)
 VALUES (1,'A Game of Thrones','1996/8/1','Voyager Books','https://i.ibb.co/ZxGchqG/gameofthrones.jpg',1,'Hard',19.99,'694','0002245841',1,10),
 (2,'The Fellowship of the Ring','1954/7/29','George Allen & Unwin','https://i.ibb.co/Pmt5mKB/fellowship.jpg',1,'Hard',24.99 ,'423','0345339703',2,5),
 (3,'The Shining','1977/1/28','Doubleday','https://i.ibb.co/XFGZSrt/shining.jpg',4,'Hard',29.99,'447','9780385121675',3,11),
@@ -30,10 +23,6 @@ VALUES (1,'A Game of Thrones','1996/8/1','Voyager Books','https://i.ibb.co/ZxGch
 (8,'It Ends with Us','2016/8/2','Atria Books','https://i.ibb.co/pbJPVZs/It-Endswith-Us.png',3,'Hard',24.99,'376','9781501110368',8,15);
 
 */
-
-
-
-
 
 
 

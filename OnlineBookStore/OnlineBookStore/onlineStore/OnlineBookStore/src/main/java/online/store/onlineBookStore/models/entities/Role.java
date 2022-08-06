@@ -1,6 +1,6 @@
 package online.store.onlineBookStore.models.entities;
 
-import online.store.onlineBookStore.models.enums.RoleEnum;
+import online.store.onlineBookStore.enums.RoleEnum;
 
 import javax.persistence.*;
 import java.util.List;

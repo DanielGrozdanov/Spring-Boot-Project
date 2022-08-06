@@ -92,3 +92,8 @@ span.price {
     border: 1px solid #ccc;
     border-radius: 3px;
 }
+.border-custom{
+    border: solid black 1px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}

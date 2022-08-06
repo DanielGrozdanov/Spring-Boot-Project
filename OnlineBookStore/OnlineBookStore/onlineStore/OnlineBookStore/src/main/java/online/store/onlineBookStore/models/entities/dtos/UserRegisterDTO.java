@@ -1,6 +1,6 @@
 package online.store.onlineBookStore.models.entities.dtos;
 
-import online.store.onlineBookStore.models.enums.GenderEnum;
+import online.store.onlineBookStore.enums.GenderEnum;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;

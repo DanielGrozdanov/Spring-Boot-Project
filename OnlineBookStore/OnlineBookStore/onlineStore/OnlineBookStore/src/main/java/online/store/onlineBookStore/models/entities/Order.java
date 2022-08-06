@@ -7,9 +7,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "orders")
-public class Order extends BaseEntity{
+public class Order {
 
-    @OneToMany
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @OneToMany(cascade = {CascadeType.REMOVE})
     private List<CartBooks> books;
 
     @ManyToOne
@@ -27,6 +31,8 @@ public class Order extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User client;
+
+    private String status = "pending";
 
     public Order() {
 
@@ -59,8 +65,26 @@ public class Order extends BaseEntity{
         return this;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public Order setStatus(String status) {
+        this.status = status;
+        return this;
+    }
+
     public LocalDate getDate() {
         return date;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Order setId(Long id) {
+        this.id = id;
+        return this;
     }
 
     public Order setDate(LocalDate date) {

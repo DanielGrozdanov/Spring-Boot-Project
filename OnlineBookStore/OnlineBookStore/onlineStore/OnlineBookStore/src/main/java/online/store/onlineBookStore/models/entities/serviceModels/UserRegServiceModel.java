@@ -2,7 +2,7 @@ package online.store.onlineBookStore.models.entities.serviceModels;
 
 import online.store.onlineBookStore.models.entities.Cart;
 import online.store.onlineBookStore.models.entities.Role;
-import online.store.onlineBookStore.models.enums.GenderEnum;
+import online.store.onlineBookStore.enums.GenderEnum;
 
 import java.util.List;
 

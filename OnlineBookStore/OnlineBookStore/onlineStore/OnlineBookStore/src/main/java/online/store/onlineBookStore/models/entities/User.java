@@ -1,11 +1,10 @@
 package online.store.onlineBookStore.models.entities;
 
 
-import online.store.onlineBookStore.models.enums.GenderEnum;
+import online.store.onlineBookStore.enums.GenderEnum;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name = "users")

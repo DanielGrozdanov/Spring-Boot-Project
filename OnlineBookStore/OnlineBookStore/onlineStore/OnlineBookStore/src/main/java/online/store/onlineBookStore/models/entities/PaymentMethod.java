@@ -2,7 +2,6 @@ package online.store.onlineBookStore.models.entities;
 
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.List;
 
 
@@ -63,16 +62,18 @@ public class PaymentMethod extends BaseEntity{
         return expiryMonth;
     }
 
-    public void setExpiryMonth(String expiryMonth) {
+    public PaymentMethod setExpiryMonth(String expiryMonth) {
         this.expiryMonth = expiryMonth;
+        return this;
     }
 
     public Integer getExpiryYear() {
         return expiryYear;
     }
 
-    public void setExpiryYear(Integer expiryYear) {
+    public PaymentMethod setExpiryYear(Integer expiryYear) {
         this.expiryYear = expiryYear;
+        return this;
     }
 
     public String getOwner() {

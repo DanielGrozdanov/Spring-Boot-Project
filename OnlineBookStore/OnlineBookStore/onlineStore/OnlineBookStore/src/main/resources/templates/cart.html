@@ -14,8 +14,8 @@
     <div class="row">
         <div th:each="content : ${getCartContent}" th:object="${content}" class="book-container">
             <div class="card mb-4 box-shadow book" style="top:20px">
-                <img th:src="*{book.picture}" th:id="*{book.id}" class="card-img-top" alt="Book Picture"
-                      data-holder-rendered="true"
+                <img th:src="*{book.pictureUrl}" th:id="*{book.id}" class="card-img-top" alt="Book Picture"
+                     data-holder-rendered="true"
                      style="height: 386px; width: 100%; display: block;">
                 <div class="card-body">
                     <div class="align-text-bottom">

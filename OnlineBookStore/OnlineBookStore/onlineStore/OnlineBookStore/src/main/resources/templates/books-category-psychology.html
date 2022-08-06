@@ -11,7 +11,7 @@
     <div class="row">
         <div th:each="book : ${booksByPsychology}" th:object="${book}" class="book-container">
             <div class="card mb-4 box-shadow book" style="top:20px" >
-                <img th:src="*{picture}" class="card-img-top" alt="Book Picture"
+                <img th:src="*{pictureUrl}" class="card-img-top" alt="Book Picture"
                      data-holder-rendered="true"
                      style="height: 386px; width: 100%; display: block;">
                 <div class="card-body">
@@ -21,7 +21,8 @@
                         <p class="card-text border-bottom ">Publisher: <span th:text="*{publisher}"></span></p>
                         <p class="card-text border-bottom ">Category: <span th:text="*{category}"></span></p>
                         <p class="card-text border-bottom ">Cover Type: <span th:text="*{coverType}"></span></p>
-                        <p class="card-text border-bottom ">Price: <span th:text="*{price}"></span></p>
+                        <p class="card-text border-bottom ">Pages: <span th:text="*{pages}"></span></p>
+                        <p class="card-text border-bottom ">Price: <span th:text="|*{price}€|"></span></p>
                         <p class="card-text border-bottom ">ISBN: <span th:text="*{isbn}"></span></p>
                         <p class="card-text border-bottom ">Author: <span th:text="*{authorName}"></span></p>
                     </div>

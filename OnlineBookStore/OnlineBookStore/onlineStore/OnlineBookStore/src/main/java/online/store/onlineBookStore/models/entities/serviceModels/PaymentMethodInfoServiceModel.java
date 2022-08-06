@@ -3,8 +3,6 @@ package online.store.onlineBookStore.models.entities.serviceModels;
 
 import online.store.onlineBookStore.models.entities.Order;
 
-import javax.persistence.Column;
-import javax.persistence.OneToMany;
 import java.util.List;
 
 public class PaymentMethodInfoServiceModel {

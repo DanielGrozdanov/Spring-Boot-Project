@@ -16,7 +16,7 @@ public class CartBooks {
     @JoinColumn(name = "book_id")
     private Book book;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false,cascade = CascadeType.MERGE)
     @JoinColumn(name = "cart_id")
     private Cart cart;
 

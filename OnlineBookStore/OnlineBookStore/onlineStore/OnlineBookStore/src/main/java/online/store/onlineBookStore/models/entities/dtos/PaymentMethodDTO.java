@@ -43,24 +43,27 @@ public class PaymentMethodDTO {
         return cardNumber;
     }
 
-    public void setCardNumber(String cardNumber) {
+    public PaymentMethodDTO setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
+        return this;
     }
 
     public String getOwner() {
         return owner;
     }
 
-    public void setOwner(String owner) {
+    public PaymentMethodDTO setOwner(String owner) {
         this.owner = owner;
+        return this;
     }
 
     public String getCvc() {
         return cvc;
     }
 
-    public void setCvc(String cvc) {
+    public PaymentMethodDTO setCvc(String cvc) {
         this.cvc = cvc;
+        return this;
     }
 
     public String getExpiryMonth() {

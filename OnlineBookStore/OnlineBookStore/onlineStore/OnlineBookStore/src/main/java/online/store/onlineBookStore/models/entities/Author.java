@@ -1,17 +1,16 @@
 package online.store.onlineBookStore.models.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name = "authors")
 public class Author extends BaseEntity{
 
+    @Column(nullable = false)
     private String authorName;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Book> books;
 
     public Author() {

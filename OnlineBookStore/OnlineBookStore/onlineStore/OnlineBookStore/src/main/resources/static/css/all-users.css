@@ -1,0 +1,37 @@
+.container-custom{
+    margin-top: 101px;
+}
+.search-custom{
+    margin-top: 165px;
+    margin-left: 240px;
+}
+.search-custom-location{
+    margin-left: 600px;
+}
+.custom-user{
+    border-radius: 27px;
+}
+
+.container-custom {
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.customized-username{
+    width: 5%
+}
+.customized-email{
+    width: 5%;
+}
+.customized-role{
+    width: 5%;
+}
+.customized-role{
+    width: 5%;
+}
+.image-size{
+    height: 60px;
+    width: 60px;
+}
+.delete-button-style{
+    Width: 2%;
+}

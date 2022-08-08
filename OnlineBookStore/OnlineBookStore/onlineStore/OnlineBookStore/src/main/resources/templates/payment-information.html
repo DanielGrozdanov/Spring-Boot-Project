@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <head>
+        <th:block th:include="~{fragments/header}"/>
+        <link rel="stylesheet" href="/css/payment-information.css"/>
+    </head>
+</head>
+<body>
+<div>
+    <nav th:replace="~{fragments/navigation}"></nav>
+</div>
+
+<div class="row">
+    <div class="col-75">
+        <div class="container">
+            <form
+                    th:action="@{/payments/payment-information}"
+                    th:method="post"
+                    th:object="${paymentMethodDTO}">
+
+                    <div class="col-50">
+                        <h3>Payment Information</h3>
+                        <label>Accepted Cards</label>
+                        <div class="icon-container">
+                            <i class="fa fa-cc-visa" style="color:navy;"></i>
+                            <i class="fa fa-cc-amex" style="color:blue;"></i>
+                            <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                            <i class="fa fa-cc-discover" style="color:orange;"></i>
+                        </div>
+                        <div>
+                            <input class="form-check-input " name="paymentType" type="checkbox" value="" id="checkBox">
+                            <label class="form-check-label withCustom " for="checkBox">
+                                Pay On Delivery.
+                            </label>
+                        </div>
+                        <div>
+                            <label for="cowner">Card Owner</label>
+                            <input th:field="*{owner}"
+                                   th:errorclass="bg-white"
+                                   type="text"
+                                   id="cowner"
+                                   name="ccowner"
+                                   placeholder="John More Doe">
+                             <small th:if="${#fields.hasErrors('owner')}" th:errors="*{'owner'}" class="bg-danger text-light rounded">
+                                 Field cannot be empty.
+                             </small>
+                        </div>
+                        <div>
+                            <label for="ccnum">Credit Card Number</label>
+                            <input th:field="*{cardNumber}"
+                                   th:erroclass="bg-white"
+                                   type="text"
+                                   id="ccnum"
+                                   name="card-number"
+                                   placeholder="1111 2222 3333 4444">
+                            <small th:if="${#fields.hasErrors('cardNumber')}" th:errors="*{'cardNumber'}" class="bg-danger text-light rounded">
+                                Not a valid card number
+                            </small>
+                        </div>
+                        <div>
+                            <label for="expmonth">Exp Month</label>
+                            <select th:field="*{expiryMonth}"
+                                   th:errorclass="bg-white"
+                                   id="expmonth"
+                                   name="expmonth" class="custom-btn-style">
+                                <option id="selectedMonth" selected value="01">January</option>
+                                <option value="02">February</option>
+                                <option value="03">March</option>
+                                <option value="04">April</option>
+                                <option value="05">May</option>
+                                <option value="06">June</option>
+                                <option value="07">July</option>
+                                <option value="08">August</option>
+                                <option value="09">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                            <small th:if="${#fields.hasErrors('expiryMonth')}"
+                                   th:errors="*{'expiryMonth'}"
+                                   class="bg-danger text-light rounded">
+                                Field cannot be empty.
+                            </small>
+                        </div>
+                        <div class="row">
+                            <div class="col-50">
+                                <label for="expyear">Exp Year</label>
+                                <select th:field="*{expiryYear}"
+                                        th:errorclass="bg-white"
+                                       type="number"
+                                       id="expyear"
+                                       name="expyear" class="expiry-year">
+                                    <option id="selectedYear" selected value="22"> 2022</option>
+                                    <option value="23">2023</option>
+                                    <option value="24">2024</option>
+                                    <option value="25">2025</option>
+                                    <option value="26">2026</option>
+                                    <option value="27">2027</option>
+                                </select>
+                            </div>
+                            <small th:if="${#fields.hasErrors('expiryYear')}"
+                                   th:errors="*{'expiryYear'}"
+                                   class="bg-danger text-light rounded">
+                                Field cannot be empty.
+                            </small>
+                            <div class="col-50">
+                                <label for="cvv">CVV</label>
+                                <input th:field="*{cvc}"
+                                       th:errorclass="bg-white"
+                                       type="text"
+                                       id="cvv"
+                                       name="cvv"
+                                       placeholder="352">
+                                <small th:if="${#fields.hasErrors('cvc')}" th:errors="*{'cvc'}" class="bg-danger text-light rounded">
+                                    Field must contain 3 symbols.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                <input type="submit" value="Finalize Order" class="btn">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+.styled {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 17px;
+    color: #926239;
+    line-height: 1.6;
+
+}
+
+.custom-nav-bar {
+    background-color: #926239;
+    position: fixed;
+    width: 100%;
+}
+
+.nav-item a{
+    border: solid;
+    display: inline-block;
+    border-radius: 4px;
+    background-color: black;
+    color: #926239;
+    text-align: center;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: -4px;
+}
+.nav-link a {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+.nav-link a:after{
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+.nav-item a:hover nav-item a{
+    padding-right: 25px;
+}
+.nav-item a:hover nav-item a:after{
+    opacity: 1;
+    right: 0;
+}

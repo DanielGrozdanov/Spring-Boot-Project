@@ -1,0 +1,13 @@
+
+.image-custom {
+    background-image: url('/images/showcase.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #464646;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    min-height: 969px;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <th:block th:include="~{fragments/header}"/>
+    <link rel="stylesheet" href="/css/all-users.css">
+</head>
+<body>
+<div>
+    <nav th:replace="~{fragments/navigation}"></nav>
+</div>
+
+<section class="middle-content">
+    <div class="search-custom">
+        <form
+                th:action="@{/admin/all-users/search}"
+                 class="form-inline search-custom-location">
+            <input th:value="${keyword}" name="keyword" id="keyword" class="form-control mr-sm-2" type="text" placeholder="Search"
+                   aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+
+    <div class="container-custom">
+        <div class="userEntity-dashboard-info-box table-responsive bg-white shadow-sm custom-user">
+            <table class="table manage-candidates-top mb-0">
+                <thead>
+                <tr>
+                    <th class="action text-left customized-username">Username</th>
+                    <th class="text-center customized-email" >Email</th>
+                    <th class="text-center customized-role">Role</th>
+                    <th class="action text-center customized-role">Gender</th>
+                    <th class="action text-center customized-role">Age</th>
+                    <th class="action text-center customized-role">Action</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="userEntities-list" th:each="user : *{allUsers}">
+                    <td class="title">
+                        <div class="candidate-list-details">
+                            <div class="candidate-list-info">
+                                <div class="candidate-list-title">
+                                    <h5 class="mb-0"><p th:text="*{user.username}"></p></h5>
+                                </div>
+                                <div class="candidate-list-option">
+                                    <ul class="list-unstyled">
+                                        <img class="image-size" src="/images/User.png">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <div class="test">
+                        <td class="candidate-list-favourite-time text-center">
+                            <span th:text="*{user.email}"><i class="fa fa-envelope-o" aria-hidden="true"></i> </span>
+                        </td>
+                        <td class="candidate-list-favourite-time text-center">
+                            <span th:text="*{user.getRole().name}"><i class="fa fa-envelope-o" aria-hidden="true"></i> </span>
+                        </td>
+                        <td class="candidate-list-favourite-time text-center">
+                            <span th:text="*{user.getGender().name()}"><i class="fa fa-envelope-o" aria-hidden="true"></i> </span>
+                        </td>
+                        <td class="candidate-list-favourite-time text-center">
+                            <span th:text="*{user.getAge()}"><i class="fa fa-envelope-o" aria-hidden="true"></i> </span>
+                        </td>
+                       <td>
+                            <a th:href="@{/admin/all-users/change/{id}(id = *{user.id})}">Change</a>
+                        </td>
+                        <td class="delete-button-style">
+                            <a th:href="@{/admin/all-users/delete/{id}(id= *{user.id})}" class="text-danger" data-toggle="tooltip">Delete</a>
+                        </td>
+                    </div>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+</body>
+</html>

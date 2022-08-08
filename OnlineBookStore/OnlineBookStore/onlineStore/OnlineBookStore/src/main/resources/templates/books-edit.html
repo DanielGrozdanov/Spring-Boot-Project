@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:include="~{fragments/header}"/>
+    <link rel="stylesheet" href="/css/books-edit.css">
+</head>
+<body>
+<div>
+    <nav th:replace="~{fragments/navigation}"></nav>
+</div>
+<main class="p-5 align-content-center bg-blur my-main">
+    <section class="row" th:object="${bookViewModel}">
+        <form th:action="@{/admin/book-edit/{id}(id = *{id})}" th:method="post" class="book-container">
+            <div class="card mb-4 box-shadow book" style="top:20px">
+                <img th:src="*{pictureUrl}" class="card-img-top" alt="Book Picture"
+                     data-holder-rendered="true"
+                     style="height: 386px; width: 100%; display: block;">
+                <div class="card-body">
+                    <div class="align-text-bottom">
+                        <label class="card-text border-bottom  ">Title: </label>
+                            <input
+                                    disabled type="text"
+                                    class="form-control"
+                                    id="title"
+                                    th:value="*{title}">
+                        <label class="card-text border-bottom ">Release Date:
+                            <input
+                                    disabled type="date"
+                                    class="form-control"
+                                    id="date"
+                                    th:value="*{releaseDate}"
+                            >
+                        </label>
+                        <label class="card-text border-bottom ">Publisher:
+                            <input disabled type="text"
+                                   class="form-control"
+                                   id="publisher"
+                                   th:value="*{publisher}">
+                        </label>
+                        <label class="card-text border-bottom ">Category:
+                            <input disabled type="text"
+                                   class="form-control"
+                                   id="category"
+                                   th:value="*{category}">
+                        </label>
+                        <label class="card-text border-bottom ">Cover Type:
+                            <input disabled type="text"
+                                   class="form-control"
+                                   id="coverType"
+                                   th:value="*{coverType}">
+                        </label>
+                        <label class="card-text border-bottom ">Pages:
+                            <input disabled type="text"
+                                   class="form-control"
+                                   id="pages"
+                                   th:value="*{pages}">
+                        </label>
+                        <label class="card-text border-bottom ">Price:
+                            <input
+                                    id="price"
+                                    th:field="*{price}"
+                                    th:value="*{price}"
+                                    th:errorclass="is-invalid"
+                                    type="number"
+                                    min="1"
+                                    step="any"
+                                    class="form-control"
+                                    placeholder="Suggested price">
+                            <p th:if="${#fields.hasErrors('price')}" th:error="*{price}"
+                               class="invalid-feedback errors alert alert-danger">
+                            </p>
+                        </label>
+                        <label class="card-text border-bottom ">Stock:
+                            <input
+                                    id="stock"
+                                    th:field="*{stock}"
+                                    th:errorclass="is-invalid"
+                                    th:value="*{stock}"
+                                    type="number"
+                                    min="1"
+                                    class="form-control"
+                                    placeholder="Stock">
+                            <p th:if="${#fields.hasErrors('stock')}" th:error="*{stock}"
+                               class="invalid-feedback errors alert alert-danger">
+                            </p>
+                        </label>
+                        <label class="card-text border-bottom ">ISBN:
+                            <input disabled type="text"
+                                   class="form-control"
+                                   id="isbn"
+                                   th:value="*{isbn}">
+                        </label>
+                        <label class="card-text border-bottom ">Author:
+                            <input
+                                    disabled type="text"
+                                    class="form-control"
+                                    id="authorName"
+                                    th:value="*{authorName}">
+                        </label>
+                        <div class="center">
+                            <button type="submit" class="btn btn-red btn-header-red btn-further save-button">SAVE
+                            </button>
+                        </div>
+                        <div>
+                            <a th:href="@{/admin/book-edit/delete/{id}(id = *{id})}" class="btn btn-red btn-header-red btn-further save-button">
+                                DELETE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>

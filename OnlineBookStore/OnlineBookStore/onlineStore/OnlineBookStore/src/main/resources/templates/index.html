@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:include="~{fragments/header}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/index.css"/>
+</head>
+<body >
+<div>
+    <nav th:replace="~{fragments/navigation}">Navigation</nav>
+</div>
+
+<header class="container-fluid main styled" id="showcase">
+    <h5 class="position-custom"> Welcome Online Book Store</h5>
+    <p style="text-align: center; padding-bottom: 30px;" >
+        Welcome to Online Book Store where you can buy all kinds of books to your liking.
+        Online books store contains books by variety of categories.
+    </p >
+    <div class="parent" style="margin-top: -21px;" >
+        <a  href="" class="button"> Sign in</a>
+    </div>
+</header>
+
+<div class="spacer"></div>
+</body>
+<th:block th:include="~{fragments/footer}"/>
+</html>

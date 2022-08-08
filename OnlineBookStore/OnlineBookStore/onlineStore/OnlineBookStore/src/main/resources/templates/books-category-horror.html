@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:include="~{fragments/header}"/>
+</head>
+<body>
+<div>
+    <nav th:replace="~{fragments/navigation}"></nav>
+</div>
+<main class="p-5 align-content-center bg-blur my-main">
+    <div class="row">
+        <div th:each="book : ${booksByHorror}" th:object="${book}" class="book-container">
+            <div class="card mb-4 box-shadow book" style="top:20px" >
+                <img th:src="*{pictureUrl}" class="card-img-top" alt="Book Picture"
+                     data-holder-rendered="true"
+                     style="height: 386px; width: 100%; display: block;">
+                <div class="card-body">
+                    <div class="align-text-bottom">
+                        <p class="card-text border-bottom  ">Title: <span th:text="*{title}"></span> </p>
+                        <p class="card-text border-bottom ">Release Date: <span th:text="*{releaseDate}"></span> </p>
+                        <p class="card-text border-bottom ">Publisher: <span th:text="*{publisher}"></span></p>
+                        <p class="card-text border-bottom ">Category: <span th:text="*{category}"></span></p>
+                        <p class="card-text border-bottom ">Cover Type: <span th:text="*{coverType}"></span></p>
+                        <p class="card-text border-bottom ">Pages: <span th:text="*{pages}"></span></p>
+                        <p class="card-text border-bottom ">Price: <span th:text="|*{price}€|"></span></p>
+                        <p class="card-text border-bottom ">ISBN: <span th:text="*{isbn}"></span></p>
+                        <p class="card-text border-bottom ">Author: <span th:text="*{authorName}"></span></p>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a th:href="@{/books/cart/{id}(id = *{id})}" th:method="post" type="submit" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal"
+                               data-bs-target="#addModel">Add To Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<th:block th:include="~{fragments/footer}"/>
+</body>
+</html>

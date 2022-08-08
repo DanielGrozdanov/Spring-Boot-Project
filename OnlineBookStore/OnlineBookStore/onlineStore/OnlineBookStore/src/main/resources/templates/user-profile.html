@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <th:block th:include="~{fragments/header}"/>
+</head>
+
+<div>
+    <nav th:replace="~{fragments/navigation}">Navigation</nav>
+</div>
+<body>
+<h2 style="text-align:center">User Profile Card</h2>
+    <div class="user-card-box user-style " th:object="${userProfile}">
+        <img src="/images/profile.png">
+        <span class="field-style" th:text="| Username: *{username}|"></span>
+        <span class="field-style" th:text="| First Name: *{firstName}|"></span>
+        <span class="field-style" th:text="| Last Name: *{lastName}|"></span>
+        <span class="field-style" th:text="| Email: *{email}|"></span>
+        <span class="field-style" th:text="| Age: *{age}|"></span>
+        <span class="field-style" th:text="| Gender: *{gender}|"></span>
+        <span class="field-style" th:text="| Phone Number: *{phoneNumber}|"></span>
+        <div class="px-4 mt-5">
+            <div style="margin: 24px 0;">
+                <a href="#"><i class="fa fa-dribbble"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+            </div>
+            <p>
+                <button>Contact</button>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

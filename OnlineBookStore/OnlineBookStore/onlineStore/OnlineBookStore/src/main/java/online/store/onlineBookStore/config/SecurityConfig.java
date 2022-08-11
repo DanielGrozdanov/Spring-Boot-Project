@@ -29,7 +29,7 @@ public class SecurityConfig {
         http
                 .authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .antMatchers("/").anonymous()
+                .antMatchers("/","/users/about").anonymous()
                 .antMatchers("/users/login", "/users/register").anonymous()
                 .antMatchers("/admin/**").hasRole(RoleEnum.ADMIN.name())
                 .antMatchers("/users/profile").authenticated()

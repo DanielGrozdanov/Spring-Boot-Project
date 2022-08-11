@@ -30,6 +30,10 @@ public class OrderServiceTest {
     private OrderService orderService;
     private ModelMapper modelMapper;
 
+
+    @Mock
+    private CartBookService cartBookService;
+
     @Mock
     private DeliveryService deliveryService;
 
@@ -65,6 +69,9 @@ public class OrderServiceTest {
     private BookRepository bookRepository;
 
     @Mock
+    private CartBooksRepository cartBooksRepository;
+
+    @Mock
     private PasswordEncoder passwordEncoder;
 
 
@@ -81,7 +88,8 @@ public class OrderServiceTest {
                         deliveryService,
                         bookRepository,
                         cartRepository,
-                        cartService);
+                        cartService,
+                        cartBooksRepository);
 
     }
 

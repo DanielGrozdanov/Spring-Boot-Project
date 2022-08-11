@@ -22,6 +22,7 @@ public class CartBooks {
 
     private Integer amount = 1;
 
+    private String status = "pending";
 
     public CartBooks() {
 
@@ -36,6 +37,8 @@ public class CartBooks {
     public Long getId() {
         return id;
     }
+
+
 
     public CartBooks setId(Long id) {
         this.id = id;

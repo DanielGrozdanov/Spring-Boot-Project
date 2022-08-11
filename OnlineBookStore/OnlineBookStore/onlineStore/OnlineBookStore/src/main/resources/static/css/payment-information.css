@@ -103,3 +103,10 @@ span.price {
     border: 1px solid #ccc;
     border-radius: 3px;
 }
+
+
+.error {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}

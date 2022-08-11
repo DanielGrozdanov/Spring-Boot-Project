@@ -6,6 +6,7 @@ import online.store.onlineBookStore.models.entities.User;
 import online.store.onlineBookStore.repositories.BookRepository;
 import online.store.onlineBookStore.services.BookService;
 import online.store.onlineBookStore.utilities.TestDataUtils;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +43,7 @@ public class AdminControllerTest {
 
     @BeforeEach
     void setUp() {
-        testDataUtils.cleanDataBase();
-        bookRepository.deleteAll();
+
         testAdmin = testDataUtils.createTestAdmin("TestAdmin");
         newBook = testDataUtils.createNewBookToAdd(testDataUtils.createTestBookDTO(testDataUtils.createTestAuthorDTO()), testDataUtils.createTestCategory());
     }
@@ -87,5 +87,9 @@ public class AdminControllerTest {
     @Test
     public void searchUserPage() throws Exception {
         mockMvc.perform(get("/admin/all-users/search")).andExpect(status().is(200));
+    }
+    @AfterEach
+    void tearDown() {
+        testDataUtils.cleanDataBase();
     }
 }

@@ -1,7 +1,9 @@
 package online.store.onlineBookStore.web;
 
+import online.store.onlineBookStore.enums.RoleEnum;
 import online.store.onlineBookStore.models.entities.CartBooks;
 import online.store.onlineBookStore.models.entities.Delivery;
+import online.store.onlineBookStore.models.entities.Role;
 import online.store.onlineBookStore.models.entities.User;
 import online.store.onlineBookStore.models.entities.dtos.DeliveryDTO;
 import online.store.onlineBookStore.services.*;
@@ -31,6 +33,7 @@ public class DeliveryController {
 
 
 
+
     @Autowired
     public DeliveryController(ModelMapper modelMapper, DeliveryService deliveryService, CartBookService cartBookService, UserService userService) {
         this.modelMapper = modelMapper;
@@ -40,7 +43,7 @@ public class DeliveryController {
     }
 
     @GetMapping("/delivery-information")
-    public String orderDetails() {
+    public String orderDetails(){
         List<CartBooks> cartBooks = this.cartBookService.checkIfThereAreBooks();
         if (cartBooks.size() == 0) {
             return "redirect:/books/view/all";
@@ -64,6 +67,7 @@ public class DeliveryController {
         Delivery delivery = this.modelMapper.map(deliveryDTO,Delivery.class);
         delivery.setOrders(new ArrayList<>());
         delivery.setUser(loggedUser);
+
         this.deliveryService.saveToDB(delivery);
 
         return "redirect:/payments/payment-information";

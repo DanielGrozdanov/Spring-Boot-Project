@@ -45,3 +45,6 @@
     opacity: 1;
     right: 0;
 }
+.background-image{
+    background-image: url('/images/showcase.jpg');
+}

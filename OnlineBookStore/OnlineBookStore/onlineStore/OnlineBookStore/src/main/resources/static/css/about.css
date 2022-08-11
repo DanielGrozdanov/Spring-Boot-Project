@@ -1,0 +1,19 @@
+.carousel-inner-custom{
+    position: relative;
+    width: 100%;
+    max-height: max-content;
+    overflow: hidden;
+}
+.carousel-content-customized{
+    text-align: center;
+    left: 60%;
+    font-size: 15px;
+    font-weight: bold;
+    position: absolute;
+    height: 80%;
+    width: 20%;
+    margin: auto;
+}
+.custom-background{
+    background-image: url('/images/showcase.jpg');
+}

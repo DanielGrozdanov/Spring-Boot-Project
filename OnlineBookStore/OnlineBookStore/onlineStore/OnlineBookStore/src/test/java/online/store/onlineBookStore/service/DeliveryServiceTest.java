@@ -8,10 +8,9 @@ import online.store.onlineBookStore.models.entities.Role;
 import online.store.onlineBookStore.models.entities.User;
 import online.store.onlineBookStore.models.entities.dtos.DeliveryDTO;
 import online.store.onlineBookStore.repositories.DeliveryRepository;
-import online.store.onlineBookStore.repositories.UserRepository;
+
 import online.store.onlineBookStore.services.DeliveryService;
-import online.store.onlineBookStore.services.RoleService;
-import online.store.onlineBookStore.services.UserService;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +19,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 import java.util.ArrayList;
 import java.util.List;

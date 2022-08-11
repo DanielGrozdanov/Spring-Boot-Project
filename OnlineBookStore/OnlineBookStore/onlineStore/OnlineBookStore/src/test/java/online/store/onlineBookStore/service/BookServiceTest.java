@@ -80,7 +80,7 @@ class BookServiceTest {
     public void SaveToDB() {
         BookDTO bookDTO = new BookDTO();
         AuthorDTO authorDTO = new AuthorDTO();
-        authorDTO.setAuthorName(author.getAuthorName());
+        authorDTO.setName(author.getAuthorName());
         Author map = this.modelMapper.map(authorDTO, Author.class);
 
         bookDTO.setTitle("NewBook");
@@ -96,7 +96,6 @@ class BookServiceTest {
         bookDTO.setAuthor(authorDTO);
 
 
-
         authorService.saveAuthor(map);
         bookService.saveToDB(bookDTO);
 
@@ -106,19 +105,17 @@ class BookServiceTest {
     }
 
     @Test
-    public void findBookById(){
+    public void findBookById() {
         when(bookRepository
                 .findById(book.getId())).thenReturn(Optional.of(book));
 
         Book book1 = bookService.findBookById(book.getId());
 
 
-        Assertions.assertEquals(book1.getTitle(),book.getTitle());
+        Assertions.assertEquals(book1.getTitle(), book.getTitle());
     }
-
-
     @Test
-    public void deleteBookById(){
+    public void deleteBookById() {
         bookRepository.saveAndFlush(book);
         bookRepository.deleteById(book.getId());
         bookService.deleteById(book.getId());
@@ -126,15 +123,15 @@ class BookServiceTest {
         List<BookViewModel> bookViewModels = bookService.findAll().stream()
                 .map(b -> modelMapper.map(b, BookViewModel.class)).toList();
 
-        Assertions.assertEquals(bookViewModels.size(),0);
+        Assertions.assertEquals(bookViewModels.size(), 0);
     }
 
     @Test
-    public void bookExistsInDB(){
+    public void bookExistsInDB() {
 
         BookDTO bookDTO = new BookDTO();
         AuthorDTO authorDTO = new AuthorDTO();
-        authorDTO.setAuthorName(author.getAuthorName());
+        authorDTO.setName(author.getAuthorName());
 
         bookDTO.setTitle("NewBook");
         bookDTO.setReleaseDate(LocalDate.of(1950, 5, 12));
@@ -155,5 +152,6 @@ class BookServiceTest {
         verify(bookRepository).findByTitle(bookDTO.getTitle());
         verify(bookRepository).findBookByIsbn(bookDTO.getIsbn());
     }
+
 
 }

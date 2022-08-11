@@ -3,19 +3,21 @@
 <head>
     <th:block th:include="~{fragments/header}"/>
     <link rel="stylesheet" href="/css/books-edit.css">
+    <link rel="stylesheet" href="/css/nav-bar.css">
+    <link rel="stylesheet" href="/css/book-dropdown.css">
 </head>
 <body>
 <div>
     <nav th:replace="~{fragments/navigation}"></nav>
 </div>
 <main class="p-5 align-content-center bg-blur my-main">
-    <section class="row" th:object="${bookViewModel}">
+    <section class="row alignment" th:object="${bookViewModel}">
         <form th:action="@{/admin/book-edit/{id}(id = *{id})}" th:method="post" class="book-container">
             <div class="card mb-4 box-shadow book" style="top:20px">
                 <img th:src="*{pictureUrl}" class="card-img-top" alt="Book Picture"
                      data-holder-rendered="true"
                      style="height: 386px; width: 100%; display: block;">
-                <div class="card-body">
+                <div class="card-body body-style">
                     <div class="align-text-bottom">
                         <label class="card-text border-bottom  ">Title: </label>
                             <input

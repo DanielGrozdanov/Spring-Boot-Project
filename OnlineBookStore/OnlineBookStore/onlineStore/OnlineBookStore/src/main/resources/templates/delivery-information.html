@@ -4,6 +4,7 @@
 <head>
     <th:block th:include="~{fragments/header}"/>
     <link rel="stylesheet" href="/css/delivery-information.css"/>
+    <link rel="stylesheet" href="/css/nav-bar.css">
 </head>
 
 <body>
@@ -19,22 +20,22 @@
                     th:object="${deliveryDTO}">
                 <div class="row">
                     <div class="col-50">
-                        <h3>Delivery Information</h3>
-                        <div class="border-custom">
+                        <h3 style="text-align: center" >Delivery Information</h3>
+                        <div>
                             <label for="personName"><i class="fa fa-user"></i> Person </label>
                             <input
                                     th:field="*{person}"
                                     th:errorclass="'is-invalid bg-danger'"
-                                    type="text"
-                                    id="personName"
-                                    name="personName"
-                                    placeholder="Person Name">
+                                   type="text"
+                                   id="personName"
+                                   name="personName"
+                                   placeholder="Person Name">
                             <small th:if="${#fields.hasErrors('person')}"
-                                   th:errors="*{person}" class="errors alert-danger">
+                                    th:errors="*{person}" class="bg-danger text-light rounded">
                                 Field must be at least 4 characters.
                             </small>
                         </div>
-                        <div class="border-custom">
+                        <div>
                             <label for="country"><i class="fa fa-flag"></i> Country</label>
                             <input th:field="*{country}"
                                    th:errorclass="'is-invalid bg-danger'"
@@ -43,11 +44,11 @@
                                    name="country"
                                    placeholder="Country">
                             <small th:if="${#fields.hasErrors('country')}"
-                                   th:errors="*{country}" class="errors alert-danger">
+                                   th:errors="*{country}" class="bg-danger text-light rounded">
                                 Field must be at least 3 characters.
                             </small>
                         </div>
-                        <div class="border-custom">
+                        <div>
                             <label for="phone number"><i class="fa fa-phone"></i> Phone Number</label>
                             <input th:field="*{phone}"
                                    th:errorclass="'is-invalid bg-danger'"
@@ -56,12 +57,12 @@
                                    name="email"
                                    placeholder="Phone Number">
                             <small th:if="${#fields.hasErrors('phone')}"
-                                   th:errors="*{phone}" class="errors alert-danger">
+                                   th:errors="*{phone}" class="bg-danger text-light rounded">
                                 Phone number is invalid.
                             </small>
                         </div>
 
-                        <div class="border-custom">
+                        <div>
                             <label for="email"><i class="fa fa-envelope"></i> Email</label>
                             <input th:field="*{email}"
                                    th:errorclass="'is-invalid bg-danger'"
@@ -69,24 +70,24 @@
                                    name="email"
                                    placeholder="daniel@example.com">
                             <small th:if="${#fields.hasErrors('email')}"
-                                   th:errors="*{email}" class="errors alert-danger">
+                                   th:errors="*{email}" class="bg-danger text-light rounded">
                                 Invalid email.
                             </small>
                         </div>
-                        <div class="border-custom">
-                            <label for="city"><i class="fa fa-institution"></i>City</label>
+                        <div>
+                            <label for="city"><i class="fa fa-institution"></i> City</label>
                             <input th:field="*{city}"
-                                   th:errorclass="'is-invalid bg-danger'"
+                                   th:erroclass="'is-invalid bg-danger'"
                                    type="text"
                                    id="city"
                                    name="city"
                                    placeholder="Sofia">
                             <small th:if="${#fields.hasErrors('city')}"
-                                   th:errors="*{city}" class="errors alert-danger">
+                                   th:errors="*{city}" class="bg-danger text-light rounded">
                                 Field must be at least 3 characters.
                             </small>
                         </div>
-                        <div class="border-custom">
+                        <div>
                             <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
                             <input th:field="*{address}"
                                    th:errorclass="'is-invalid bg-danger'"
@@ -94,25 +95,25 @@
                                    name="address"
                                    placeholder="Street 5th №11">
                             <small th:if="${#fields.hasErrors('address')}"
-                                   th:errors="*{address}" class="errors alert-danger">
+                                   th:errors="*{address}" class="bg-danger text-light rounded">
                                 Field must be at least 5 characters.
                             </small>
-                        </div>
-                        <div class="border-custom">
-                            <label for="postalCode"><i class="fa fa-map-pin"></i>Postal Code</label>
-                            <input th:field="*{postalCode}"
-                                   th:errorclass="'is-invalid bg-danger'"
-                                   type="text" id="postalCode"
-                                   name="postalCode"
-                                   placeholder="2011">
-                            <small th:if="${#fields.hasErrors('postalCode')}"
-                                   th:errors="*{postalCode}" class="errors alert-danger">
-                                Field must be at least 5 characters.
-                            </small>
-                        </div>
-                        <selection >
+                            </div>
+                            <div>
+                                <label for="postalCode"><i class="fa fa-map-pin"></i>Postal Code</label>
+                                <input th:field="*{postalCode}"
+                                       th:errorclass="'is-invalid bg-danger'"
+                                       type="text" id="postalCode"
+                                       name="postalCode"
+                                       placeholder="2011">
+                                <small th:if="${#fields.hasErrors('postalCode')}"
+                                       th:errors="*{postalCode}" class="bg-danger text-light rounded">
+                                    Field must be at least 5 characters.
+                                </small>
+                               </div>
+                        <selection>
                             <label for="courier"><i class="fa fa-shipping-fast"></i>Courier </label>
-                            <div class="border-custom">
+                            <div>
                                 <select th:field="*{courier}"
                                         th:errorclass="'is-invalid bg-danger'"
                                         id="courier"
@@ -121,9 +122,6 @@
                                     <option value="UPS">UPS</option>
                                     <option value="ZTO">ZTO</option>
                                 </select>
-                                <small th:if="${#fields.hasErrors('courier')}" th:erros="*{courier}" class="errors alert-danger">
-                                    Field cannot be empty.
-                                </small>
                             </div>
                         </selection>
                     </div>

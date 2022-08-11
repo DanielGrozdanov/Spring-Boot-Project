@@ -4,6 +4,7 @@ package online.store.onlineBookStore.services;
 import online.store.onlineBookStore.filepath.FilePath;
 import online.store.onlineBookStore.models.entities.*;
 import online.store.onlineBookStore.repositories.BookRepository;
+import online.store.onlineBookStore.repositories.CartBooksRepository;
 import online.store.onlineBookStore.repositories.CartRepository;
 import online.store.onlineBookStore.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +28,14 @@ public class OrderService {
     private final BookRepository bookRepository;
     private final CartRepository cartRepository;
     private final CartService cartService;
+    private final CartBooksRepository cartBooksRepository;
 
 
     @Autowired
     public OrderService(UserService userService, OrderRepository orderRepository
-            , PaymentMethodService paymentMethodService1, DeliveryService deliveryService, BookRepository bookRepository, CartRepository cartRepository, CartService cartService) {
+            , PaymentMethodService paymentMethodService1,
+                        DeliveryService deliveryService, BookRepository bookRepository, CartRepository cartRepository,
+                        CartService cartService , CartBooksRepository cartBooksRepository) {
         this.userService = userService;
         this.orderRepository = orderRepository;
         this.paymentMethodService = paymentMethodService1;
@@ -39,24 +43,31 @@ public class OrderService {
         this.bookRepository = bookRepository;
         this.cartRepository = cartRepository;
         this.cartService = cartService;
+        this.cartBooksRepository = cartBooksRepository;
     }
 
-    public Order getOrder(Principal principal) {
+    public Order getOrder(Principal principal) throws Exception {
         String name = principal.getName();
         User loggedUser = this.userService.findByUsername(name);
 
-        Order order = new Order();
-        order.setDate(LocalDate.now());
-        order.setPaymentMethod(paymentMethodService.findByUser(loggedUser));
-        order.setDelivery(deliveryService.findByUser(loggedUser));
+
         double totalAmount = 0.00;
 
         List<CartBooks> cartBooksList = new ArrayList<>();
         Cart currentCart = this.cartService.validateCart(loggedUser);
         Set<CartBooks> cart = currentCart.getCart();
 
+        if (cart.size() == 0){
+            throw new Exception("Cart is empty!!");
+        }
+
+
         for (CartBooks cartBooks :cart) {
             Integer amount = cartBooks.getAmount();
+
+            if (cartBooks.getBook().getStock() == 0){
+                throw new Exception("Book out of stock");
+            }
             BigDecimal price = cartBooks.getBook().getPrice();
             totalAmount += amount * Double.parseDouble(price.toString());
             Book book = cartBooks.getBook();
@@ -66,6 +77,14 @@ public class OrderService {
             this.bookRepository.save(book);
 
         }
+
+        Order order = new Order();
+        order.setDate(LocalDate.now());
+        order.setPaymentMethod(paymentMethodService.findByUser(loggedUser));
+        order.setDelivery(deliveryService.findByUser(loggedUser));
+
+
+
         order.setBooks(cartBooksList);
         order.setTotalValue(BigDecimal.valueOf(totalAmount));
         User user = this.userService.findByUsername(principal.getName());
@@ -78,6 +97,7 @@ public class OrderService {
     public void save(Order order) {
         Order orderCompleted = this.orderRepository.saveAndFlush(order);
         this.cartRepository.setStatus("closed");
+        this.cartBooksRepository.setStatus("closed");
         writeOrderToFile(orderCompleted);
     }
 

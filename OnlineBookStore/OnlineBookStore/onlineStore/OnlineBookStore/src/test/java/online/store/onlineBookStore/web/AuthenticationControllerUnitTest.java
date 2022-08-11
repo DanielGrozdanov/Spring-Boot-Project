@@ -1,6 +1,7 @@
 package online.store.onlineBookStore.web;
 
 import online.store.onlineBookStore.repositories.UserRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class AuthenticationControllerUnitTest {
 
     @BeforeEach
     void prep() {
-       userRepository.deleteAll();
+
     }
 
 
@@ -44,7 +45,37 @@ public class AuthenticationControllerUnitTest {
         mockMvc.perform(get("/users/login"))
                 .andExpect(status().is(200))
                 .andExpect(view().name("login"));
+
     }
+
+    @WithMockUser(
+            username = "TestUser",
+            roles = "USER"
+    )
+    @Test
+    public void getIndex() throws Exception {
+        mockMvc.perform(get("/users")).andExpect(status().is(200))
+                .andExpect(view().name("index"));
+    }
+
+    @WithMockUser(
+            username = "TestUser",
+            roles = "USER"
+    )
+    @Test
+    public void getHome() throws Exception {
+        mockMvc.perform(get("/users/home")).andExpect(status().is(200))
+                .andExpect(view().name("home"));
+    }
+
+
+    @Test
+    public void getAbout() throws Exception {
+        mockMvc.perform(get("/users/about")).andExpect(status().is(200))
+                .andExpect(view().name("about"));
+    }
+
+
     @Test
     void testUserRegistration() throws Exception {
         mockMvc.perform(post("/users/register")
@@ -101,4 +132,8 @@ public class AuthenticationControllerUnitTest {
                 .andExpect(view().name("login"));
     }
 
+    @AfterEach
+    void tearDown() {
+       userRepository.deleteAll();
+    }
 }

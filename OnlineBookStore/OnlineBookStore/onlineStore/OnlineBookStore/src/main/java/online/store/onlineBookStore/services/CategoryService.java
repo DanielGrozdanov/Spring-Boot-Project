@@ -26,8 +26,8 @@ public class CategoryService {
                 switch (categoryEnum){
                     case Romance -> category.setDescription("Romance novels are perhaps the most popular genre in terms of book sales." +
                             "Romance novels are sold in grocery store checkout lines, in monthly shipments from publishers to readers, and online, as well as via self-publishing services.");
-                    case Psychology-> category.setDescription("The best psychology books combine scientific rigour with accessible writing. " +
-                            "We turned to some of the most eminent psychologists working today for their book recommendations.");
+                    case Psychology-> category.setDescription("Psychology is a broad and diverse field that concentrates on studying how people, including you, behave and think. It covers emotions, personality, and so much more." +
+                            "When you understand psychology, you will understand yourself and the people around you.");
                     case Fantasy -> category.setDescription("Fantasy is a genre that uses magic and other supernatural forms as a primary element of plot, theme, and/or setting. " +
                             "Fantasy is generally distinguished from science fiction and horror by the expectation that it steers clear of technological and macabre themes, respectively, though there is a great deal of overlap between the three (collectively known as speculative fiction or science fiction/fantasy");
                     case Horror -> category.setDescription("For some, horror is a genre founded on trope and convention: a checklist of blighted houses and monstrous secrets, men in masks and women in white nightgowns. " +

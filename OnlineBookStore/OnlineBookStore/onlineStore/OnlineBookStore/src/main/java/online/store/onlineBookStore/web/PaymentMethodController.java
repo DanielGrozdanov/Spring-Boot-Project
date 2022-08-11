@@ -1,10 +1,12 @@
 
 package online.store.onlineBookStore.web;
 
+import online.store.onlineBookStore.enums.RoleEnum;
 import online.store.onlineBookStore.models.entities.Delivery;
 import online.store.onlineBookStore.models.entities.Order;
 import online.store.onlineBookStore.models.entities.PaymentMethod;
 import online.store.onlineBookStore.models.entities.User;
+import online.store.onlineBookStore.models.entities.dtos.DeliveryDTO;
 import online.store.onlineBookStore.models.entities.serviceModels.PaymentMethodInfoServiceModel;
 import online.store.onlineBookStore.models.entities.dtos.PaymentMethodDTO;
 
@@ -43,22 +45,28 @@ public class PaymentMethodController {
     }
 
     @GetMapping("/payment-information")
-    public String payment() {
+    public String payment(Principal principal) {
+        User user = this.userService.findByUsername(principal.getName());
+        Delivery deliveryServiceByUser = this.deliveryService.findByUser(user);
+        if (deliveryServiceByUser == null){
+            return "redirect:/delivery-information";
+        }
         return "payment-information";
     }
 
     @PostMapping("/payment-information")
     public String paymentInfoPost(@Valid PaymentMethodDTO paymentMethodDTO, BindingResult bindingResult
-            , RedirectAttributes redirectAttributes, Principal principal) {
+            ,RedirectAttributes redirectAttributes, Principal principal) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("paymentMethodDTO", paymentMethodDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.paymentMethodDTO", bindingResult);
+            return "redirect:/payments/payment-information";
+        }
 
         PaymentMethodInfoServiceModel paymentMethodInfoServiceModel = new PaymentMethodInfoServiceModel();
         if (paymentMethodDTO.getPaymentType() == null) {
 
-            if (bindingResult.hasErrors()) {
-                redirectAttributes.addFlashAttribute("paymentMethodDTO", paymentMethodDTO);
-                redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.paymentMethodDTO", bindingResult);
-                return "redirect:/payments/payment-information";
-            }
             paymentMethodInfoServiceModel = modelMapper.map(paymentMethodDTO, PaymentMethodInfoServiceModel.class);
             paymentMethodInfoServiceModel.setPaymentType("Credit Card");
             paymentMethodInfoServiceModel.setOrder(new ArrayList<>());
@@ -78,10 +86,15 @@ public class PaymentMethodController {
 
         return "redirect:/payments/order-completed";
     }
+    @ModelAttribute("paymentMethodDTO")
+    public PaymentMethodDTO paymentMethodDTO() {
+        return new PaymentMethodDTO();
+    }
+
 
 
     @GetMapping("/order-completed")
-    public String orderCompleted(Principal principal){
+    public String orderCompleted(Principal principal, RedirectAttributes redirectAttributes){
 
         String name = principal.getName();
         User currentUser = this.userService.findByUsername(name);
@@ -96,14 +109,17 @@ public class PaymentMethodController {
         }
 
 
-            Order order = this.orderService.getOrder(principal);
-            this.orderService.save(order);
+        Order order = null;
+        try {
+            order = this.orderService.getOrder(principal);
+
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("message","You have a book out of stock.");
+            redirectAttributes.addFlashAttribute("message2","Cart is empty!!!");
+            return "redirect:/payments/payment-information";
+        }
+        this.orderService.save(order);
 
         return "order-completed";
-    }
-
-    @ModelAttribute("paymentMethodDTO")
-    public PaymentMethodDTO paymentMethodDTO() {
-        return new PaymentMethodDTO();
     }
 }

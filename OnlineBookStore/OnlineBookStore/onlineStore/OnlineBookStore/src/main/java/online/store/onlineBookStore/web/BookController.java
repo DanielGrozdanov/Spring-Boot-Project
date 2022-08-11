@@ -1,6 +1,7 @@
 package online.store.onlineBookStore.web;
 
 
+import online.store.onlineBookStore.enums.RoleEnum;
 import online.store.onlineBookStore.models.entities.CartBooks;
 import online.store.onlineBookStore.models.entities.Book;
 import online.store.onlineBookStore.models.entities.Cart;
@@ -36,7 +37,6 @@ public class BookController {
         this.cartService = cartService;
         this.cartBookService = cartBookService;
     }
-
 
 
     @GetMapping("/view/all")
@@ -78,8 +78,8 @@ public class BookController {
 
     @GetMapping("/cart/remove/{id}")
     public String removeBookFromCart(@PathVariable Long id) {
-        List<CartBooks> cartBooks = this.cartBookService.checkIfThereAreBooks();
-        if (cartBooks != null) {
+        List<CartBooks> cartBooksList = this.cartBookService.checkIfThereAreBooks();
+        if (cartBooksList != null) {
             this.cartBookService.removeById(id);
         }
         return "redirect:/books/cart";
@@ -87,18 +87,20 @@ public class BookController {
 
     @GetMapping("/cart")
     public String getCart(Principal principal, Model model) {
-        List<CartBooks> cartBooks = this.cartBookService.checkIfThereAreBooks();
-        if (cartBooks.size() == 0) {
-            return "redirect:/books/view/all";
-        }
         String name = principal.getName();
         User loggedUser = this.userService.findByUsername(name);
+        Cart cart = cartService.validateCart(loggedUser);
+
+        List<CartBooks> cartContent = this.cartService.findCartContent(cart.getId());
+
+        if (cartContent == null) {
+            return "redirect:/books/view/all";
+        }
 
         if (this.cartService.validateCart(loggedUser) == null) {
             return "redirect:/books/view/all";
         }
-        Cart cart = cartService.validateCart(loggedUser);
-        List<CartBooks> cartContent = cartService.findCartContent(cart.getId());
+
 
         model.addAttribute("getCartContent", cartContent);
         return "cart";

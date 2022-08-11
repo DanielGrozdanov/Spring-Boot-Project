@@ -26,6 +26,4 @@ public interface CartRepository extends JpaRepository<Cart,Long> {
     @Query("DELETE FROM Cart c WHERE c.status = ?1")
     void deleteCartByStatus(String status);
 
-
-
 }

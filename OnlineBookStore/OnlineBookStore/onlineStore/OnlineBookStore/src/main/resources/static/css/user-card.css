@@ -14,9 +14,14 @@
 }
 .field-style{
     display: block;
-    font-family: cursive;
+    font-family: 'FontAwesome', serif;
     font-size: 20px;
     margin-top: 10px;
+    font-weight: bold;
+}
+.parameter{
+    font-weight: normal;
+    font-size: 16px;
 }
 .title {
     color: grey;
@@ -31,4 +36,7 @@ a {
 
 button:hover, a:hover {
     opacity: 0.7;
+}
+.user-profile-back{
+    background-image: url('/images/people.jpg');
 }

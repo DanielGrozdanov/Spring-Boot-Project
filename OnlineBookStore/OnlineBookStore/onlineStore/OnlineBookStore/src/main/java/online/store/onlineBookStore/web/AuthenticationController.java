@@ -41,6 +41,11 @@ public class AuthenticationController {
         return "home";
     }
 
+    @GetMapping("/about")
+    public String about() {
+        return "about";
+    }
+
     @GetMapping("")
     public String index() {
         return "index";

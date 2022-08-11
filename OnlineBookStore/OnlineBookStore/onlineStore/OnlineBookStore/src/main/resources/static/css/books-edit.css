@@ -3,3 +3,10 @@
     width: 100%;
     background-color: green;
 }
+.alignment{
+    align-items: center;
+    justify-content: center;
+}
+.body-style{
+    background-color: white;
+}

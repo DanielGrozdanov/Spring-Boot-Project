@@ -35,3 +35,6 @@
 .delete-button-style{
     Width: 2%;
 }
+.users-background{
+    background-image: url('/images/users.jpg');
+}

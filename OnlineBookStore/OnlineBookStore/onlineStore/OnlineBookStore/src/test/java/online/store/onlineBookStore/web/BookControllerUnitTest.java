@@ -45,7 +45,6 @@ class BookControllerUnitTest {
 
     @BeforeEach
     void setUp() {
-        testDataUtils.cleanDataBase();
 
         testUser = testDataUtils.createTestUser("TestUser");
         book = testDataUtils.createBook(testDataUtils.createTestCategory(), testDataUtils.createTestAuthor());
@@ -56,22 +55,7 @@ class BookControllerUnitTest {
         cart.setCart(set);
 
     }
-    @AfterEach
-    void tearDown() {
-        testDataUtils.cleanDataBase();
-    }
 
-
-
-    @WithMockUser(
-            username = "TestUser",
-            roles = "USER"
-    )
-    @Test
-    public void getIndex() throws Exception {
-        mockMvc.perform(get("/books")).andExpect(status().is(200))
-                .andExpect(view().name("index"));
-    }
     @WithMockUser(
             username = "TestUser",
             roles = "USER"
@@ -88,7 +72,7 @@ class BookControllerUnitTest {
     )
     @Test
     public void removeBookFromCartTest() throws Exception {
-        mockMvc.perform(get("/books/cart/remove/" + book.getId())).andExpect(status().is(302));
+        mockMvc.perform(get("/books/cart/remove/" + cartBooks.getId())).andExpect(status().is(302));
     }
 
     @WithMockUser(
@@ -145,6 +129,11 @@ class BookControllerUnitTest {
     @Test
     public void viewBooksByCategoryRomance() throws Exception {
         mockMvc.perform(get("/books/category/romance")).andExpect(status().isOk());
+    }
+
+    @AfterEach
+    void tearDown() {
+        testDataUtils.cleanDataBase();
     }
 
 }

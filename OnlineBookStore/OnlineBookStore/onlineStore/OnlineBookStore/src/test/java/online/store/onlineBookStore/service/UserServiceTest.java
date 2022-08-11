@@ -7,8 +7,10 @@ import online.store.onlineBookStore.models.entities.User;
 import online.store.onlineBookStore.models.entities.dtos.UserRegisterDTO;
 import online.store.onlineBookStore.repositories.RoleRepository;
 import online.store.onlineBookStore.repositories.UserRepository;
+import online.store.onlineBookStore.services.OnlineBookStoreDetailsService;
 import online.store.onlineBookStore.services.RoleService;
 import online.store.onlineBookStore.services.UserService;
+import online.store.onlineBookStore.viewModel.BookViewModel;
 import online.store.onlineBookStore.viewModel.UserViewModel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,6 +44,7 @@ public class UserServiceTest {
 
     @Mock
     private UserRepository testUserRepository;
+    private OnlineBookStoreDetailsService onlineBookStoreDetailsService;
 
     @Mock
     private RoleRepository roleRepository;
@@ -52,7 +55,7 @@ public class UserServiceTest {
         testUserRole = new Role();
         modelMapper = new ModelMapper();
         testUserRole.setName(RoleEnum.USER);
-        testUserService = new UserService(testUserRepository,modelMapper,passwordEncoder,testRoleService);
+        testUserService = new UserService(testUserRepository, modelMapper, passwordEncoder, testRoleService);
         testUser.setUsername("UserT")
                 .setFirstName("Pesho")
                 .setLastName("Peshov")
@@ -65,29 +68,48 @@ public class UserServiceTest {
     }
 
     @Test
-    public void notFound(){
-        assertThrows(Exception.class,() -> testUserService.findByUsername("invalid"));
-    };
+    public void notFound() {
+        assertThrows(Exception.class, () -> testUserService.findByUsername("invalid"));
+    }
+
 
     @Test
-    public void found(){
-        when(testUserRepository.findByUsername(testUser.getUsername())).thenReturn(Optional.of(testUser));
-        User byUsername = testUserService.findByUsername(testUser.getUsername());
+    public void deleteBookById() {
+        testUserRepository.saveAndFlush(testUser);
+        testUserRepository.deleteById(testUser.getId());
+        testUserService.deleteUserBy(testUser.getId());
 
-        Assertions.assertEquals(byUsername.getUsername(),testUser.getUsername());
+
+        List<UserViewModel> userViewModels = testUserService.findAll().stream()
+                .map(user -> modelMapper.map(user, UserViewModel.class)).toList();
+
+        Assertions.assertEquals(userViewModels.size(), 0);
     }
 
     @Test
-    public void allUser(){
+    public void found() {
+        when(testUserRepository.findByUsername(testUser.getUsername())).thenReturn(Optional.of(testUser));
+        User byUsername = testUserService.findByUsername(testUser.getUsername());
+
+        Assertions.assertEquals(byUsername.getUsername(), testUser.getUsername());
+    }
+
+    @Test
+    public void allUser() {
         when(testUserRepository.findAll()).thenReturn(List.of(testUser));
         List<UserViewModel> all = testUserService.findAll()
                 .stream().map(user -> modelMapper.map(user, UserViewModel.class)).toList();
 
-        Assertions.assertEquals(all.size(),1);
+        Assertions.assertEquals(all.size(), 1);
     }
 
     @Test
-    public void saveUser(){
+    public void deleteUserTest() {
+        
+    }
+
+    @Test
+    public void saveUser() {
         User adminUser = new User();
         testUserRole = new Role();
         modelMapper = new ModelMapper();
@@ -104,7 +126,7 @@ public class UserServiceTest {
                 .setPhoneNumber("+359222222222")
                 .setRole(testUserRole);
 
-        testUserService = new UserService(testUserRepository,modelMapper,passwordEncoder,testRoleService);
+        testUserService = new UserService(testUserRepository, modelMapper, passwordEncoder, testRoleService);
 
         when(testUserRepository.saveAndFlush(adminUser)).thenReturn(adminUser);
 
@@ -113,14 +135,14 @@ public class UserServiceTest {
 
         User current = this.testUserService.saveUser(adminUser);
 
-        Assertions.assertEquals(current,testUserService.findByUsername(adminUser.getUsername()));
+        Assertions.assertEquals(current, testUserService.findByUsername(adminUser.getUsername()));
     }
 
     @Test
-    public void userExistsInDataBase(){
+    public void userExistsInDataBase() {
         modelMapper = new ModelMapper();
         passwordEncoder = new Pbkdf2PasswordEncoder();
-        testUserService = new UserService(testUserRepository,modelMapper,passwordEncoder,testRoleService);
+        testUserService = new UserService(testUserRepository, modelMapper, passwordEncoder, testRoleService);
 
         testUserService.saveUser(testUser);
         when(testUserRepository

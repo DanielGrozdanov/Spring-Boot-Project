@@ -13,3 +13,15 @@
     margin-top: 65px;
     margin-bottom: -57px;
 }
+
+.custom-style{
+    background: white;
+}
+.shopping-cart{
+    background-image: url('/images/shopping-cart.jpg');
+}
+.with-color{
+    background-color: #926239;
+    color: white;
+    outline: auto;
+}

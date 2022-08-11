@@ -1,3 +1,18 @@
+
+.image-custom {
+    background-image: url('/images/showcase.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #464646;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    min-height: 969px;
+}
+
+
 .book{
     border-bottom: 1px solid white;
     margin-top: 50px;
@@ -9,4 +24,60 @@
 }
 .customized-button{
     margin-top: 5px;
+}
+.customized{
+    border: solid 2px;
+    background-image: linear-gradient(to bottom right, rgb(251 243 243 / 80%), rgb(54 54 54 / 80%));
+    opacity: 1.9;
+    background-color: #ddcdcd00;
+    font-style: italic;
+    font-family: sans-serif;
+}
+.button-customized{
+    color: #f8f9fa;
+    background: black;
+}
+.cb{
+    text-align: center;
+}
+.sb{
+    display: block;
+    margin-top: 3px;
+    text-align: center;
+    font-weight: bold;
+    border: solid 1px;
+    border-top: 1px solid white;
+    border-left: 1px solid white;
+    border-right: 1px solid #f8f9fa;
+}
+
+.fantasy {
+    background-image: url('/images/fantasy.jpg');
+}
+
+.horror {
+    background-image: url('/images/horror.jpg');
+
+}
+.psychology {
+    background-image: url('/images/psychology.jpg');
+}
+
+.romance{
+    background-image: url('/images/romance.jpg');
+}
+
+.category-title{
+    color: white;
+    text-align: center;
+    margin: 25px auto;
+    width: 10%;
+    background: #926239;
+}
+
+.category-description{
+    color: white;
+    font-weight: bold;
+    font-size: 19px;
+    background: #926239;
 }

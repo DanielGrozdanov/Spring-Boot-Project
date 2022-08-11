@@ -183,7 +183,7 @@ public class TestDataUtils {
 
     public AuthorDTO createTestAuthorDTO() {
         AuthorDTO authorDTO = new AuthorDTO();
-        authorDTO.setAuthorName("TheAddedAuthor");
+        authorDTO.setName("TheAddedAuthor");
         return authorDTO;
     }
 
@@ -239,4 +239,5 @@ public class TestDataUtils {
         authorRepository.deleteAll();
         categoryRepository.deleteAll();
     }
+
 }

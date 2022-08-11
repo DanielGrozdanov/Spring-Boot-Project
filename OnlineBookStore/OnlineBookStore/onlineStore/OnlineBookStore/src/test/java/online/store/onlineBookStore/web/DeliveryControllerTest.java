@@ -3,6 +3,8 @@ package online.store.onlineBookStore.web;
 import online.store.onlineBookStore.models.entities.*;
 import online.store.onlineBookStore.models.entities.dtos.DeliveryDTO;
 import online.store.onlineBookStore.repositories.DeliveryRepository;
+import online.store.onlineBookStore.repositories.RoleRepository;
+import online.store.onlineBookStore.repositories.UserRepository;
 import online.store.onlineBookStore.utilities.TestDataUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +14,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.RequestBuilder;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,7 +36,13 @@ public class DeliveryControllerTest {
     private CartBooks testCartBooks;
     private Cart testCart;
     private User testUser;
+    private Role testRole;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Autowired
     private DeliveryRepository deliveryRepository;
@@ -45,22 +52,23 @@ public class DeliveryControllerTest {
 
     @BeforeEach
     void setUp(){
+
+
         testUser = testDataUtils.createTestUser("TestUser");
+        testUser = testDataUtils.createTestAdmin("AdminUser");
         testDeliveryDTO = testDataUtils.createTestDeliveryDTO();
+
         testBook = testDataUtils.createBook(testDataUtils.createTestCategory(),testDataUtils.createTestAuthor());
         testCart = testDataUtils.createTestCart(testUser);
         testCartBooks = testDataUtils.createTestCartBooks(testBook,testCart);
     }
 
-    @WithMockUser(username = "TestUser",roles = "USER")
+
+    @WithMockUser(username = "AdminUser",roles = "ADMIN")
     @Test
     public void getDeliveryTest() throws Exception {
-        mockMvc.perform(get("/deliveries/delivery-information"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("delivery-information"));
-        if (testCartBooks == null){
-             mockMvc.perform((RequestBuilder) redirectedUrl("/books/view/all"));
-        }
+            mockMvc.perform(get("/deliveries/delivery-information"))
+                    .andExpect(status().is(200));
     }
 
     @WithMockUser(username = "TestUser",roles = "USER")

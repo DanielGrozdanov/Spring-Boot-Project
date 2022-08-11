@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -50,6 +51,7 @@ public class BookDTO {
     @Min(1)
     private Integer stock;
 
+    @Valid
     @NotNull(message = "Author field cannot be empty!")
     private AuthorDTO author;
 
@@ -155,6 +157,7 @@ public class BookDTO {
         this.stock = stock;
         return this;
     }
+
 
     public AuthorDTO getAuthor() {
         return author;

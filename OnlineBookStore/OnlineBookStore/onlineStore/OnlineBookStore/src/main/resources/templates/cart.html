@@ -3,21 +3,22 @@
 <head>
     <th:block th:include="~{fragments/header}"/>
     <link rel="stylesheet" href="/css/cart.css"/>
+    <link rel="stylesheet" href="/css/nav-bar.css">
 </head>
-<body>
+<body class="shopping-cart">
 <div>
     <nav th:replace="~{fragments/navigation}"></nav>
 </div>
 <main class="p-5 align-content-center bg-blur my-main">
-    <a href="/deliveries/delivery-information" class="make-order-button"> Create Order</a>
-    <a href="/books/view/all" class="make-order-button"> Continue Shopping</a>
+    <a href="/deliveries/delivery-information" class="make-order-button with-color"> Create Order</a>
+    <a href="/books/view/all" class="make-order-button with-color"> Continue Shopping</a>
     <div class="row">
         <div th:each="content : ${getCartContent}" th:object="${content}" class="book-container">
             <div class="card mb-4 box-shadow book" style="top:20px">
                 <img th:src="*{book.pictureUrl}" th:id="*{book.id}" class="card-img-top" alt="Book Picture"
                      data-holder-rendered="true"
                      style="height: 386px; width: 100%; display: block;">
-                <div class="card-body">
+                <div class="card-body custom-style">
                     <div class="align-text-bottom">
                         <div class="card-text border-bottom">
                             <label for="title">Title:</label>
@@ -32,6 +33,7 @@
                             <input disabled type="number" class="form-control" min="1" id="amount" th:value="*{amount}"
                                    th:placeholder="*{amount}" autocomplete="off">
                         </div>
+
                     </div>
                     <div class="btn-group">
                         <a th:href="@{/books/cart/remove/{id}(id = *{id})}" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal"

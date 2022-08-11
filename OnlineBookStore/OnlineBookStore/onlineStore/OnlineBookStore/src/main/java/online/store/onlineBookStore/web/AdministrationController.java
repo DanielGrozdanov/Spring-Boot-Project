@@ -69,20 +69,29 @@ public class AdministrationController {
     }
 
     @PostMapping("/book-add")
-    public String addBook(@Valid BookDTO bookDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String addBook(@Valid BookDTO bookDTO,BindingResult bindingResult,RedirectAttributes redirectAttributes) {
+
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("bookDTO", bookDTO);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.authorDTO", bindingResult);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.bookDTO", bindingResult);
+            return "redirect:/admin/book-add";
         }
         boolean bookAlreadyExists = this.bookService.findByBookTitle(bookDTO.getTitle());
         boolean bookIsbnExists = this.bookService.findByBookIsbn(bookDTO.getIsbn());
 
         if (bookAlreadyExists || bookIsbnExists) {
+            redirectAttributes.addFlashAttribute("bookDTO",bookDTO);
+            redirectAttributes.addFlashAttribute("bookAlreadyExists",true);
             return "redirect:/admin/book-add";
         }
 
         this.bookService.saveToDB(bookDTO);
         return "redirect:/books/view/all";
+    }
+
+    @ModelAttribute("bookAlreadyExists")
+    public boolean bookAlreadyExists() {
+        return false;
     }
 
     @GetMapping("/all-users")
@@ -120,7 +129,6 @@ public class AdministrationController {
     public BookDTO bookDTO() {
         return new BookDTO();
     }
-
     @ModelAttribute("authorDTO")
     public AuthorDTO authorDTO() {
         return new AuthorDTO();

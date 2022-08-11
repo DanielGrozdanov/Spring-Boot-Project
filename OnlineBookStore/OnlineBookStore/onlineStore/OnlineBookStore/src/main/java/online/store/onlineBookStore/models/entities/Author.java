@@ -1,6 +1,7 @@
 package online.store.onlineBookStore.models.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -8,6 +9,7 @@ import java.util.Set;
 public class Author extends BaseEntity{
 
     @Column(nullable = false)
+    @Size(min = 3,message = "Author name must be at least 3 characters!")
     private String authorName;
 
     @OneToMany(cascade = CascadeType.ALL)

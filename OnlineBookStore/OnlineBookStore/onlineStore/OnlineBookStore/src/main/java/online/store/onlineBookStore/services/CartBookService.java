@@ -21,12 +21,15 @@ public class CartBookService {
         return cartBooksRepository.findByBookIdAndCartId(book.getId(), cart.getId());
     }
 
-
    public void removeById(Long id){
        this.cartBooksRepository.deleteById(id);
    }
 
     public List<CartBooks> checkIfThereAreBooks() {
         return this.cartBooksRepository.findAll();
+    }
+
+    public void purgeCartBooksTable() {
+        this.cartBooksRepository.deleteAll();
     }
 }

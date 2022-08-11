@@ -1,9 +1,6 @@
 package online.store.onlineBookStore.schedulers;
 
-import online.store.onlineBookStore.services.CartService;
-import online.store.onlineBookStore.services.DeliveryService;
-import online.store.onlineBookStore.services.OrderService;
-import online.store.onlineBookStore.services.PaymentMethodService;
+import online.store.onlineBookStore.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,19 +16,22 @@ public class PurgeDataBaseScheduler {
     private final OrderService orderService;
     private final DeliveryService deliveryService;
     private final PaymentMethodService paymentMethodService;
+    private final CartBookService cartBookService;
 
 
     @Autowired
-    public PurgeDataBaseScheduler(CartService cartService, OrderService orderService, DeliveryService deliveryService, PaymentMethodService paymentMethodService) {
+    public PurgeDataBaseScheduler(CartService cartService, OrderService orderService, DeliveryService deliveryService, PaymentMethodService paymentMethodService, CartBookService cartBookService) {
         this.cartService = cartService;
         this.orderService = orderService;
         this.deliveryService = deliveryService;
         this.paymentMethodService = paymentMethodService;
+        this.cartBookService = cartBookService;
     }
 
     @Scheduled(cron = "01 30 03 * * *")
     public void purgeCartDataBase(){
         this.cartService.purgeCartTable();
+        this.cartBookService.purgeCartBooksTable();
         LOGGER.info("Cart database maintenance completed.");
     }
 

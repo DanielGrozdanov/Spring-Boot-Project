@@ -44,7 +44,7 @@ public class PaymentMethodControllerTest {
 
     @BeforeEach
     private void setUp() {
-        testDataUtils.cleanDataBase();
+
         testUser = testDataUtils.createTestUser("TestUser");
         testPaymentMethod = testDataUtils
                 .createTestPaymentMethod(testDataUtils.createTestPaymentMethodTO(),testUser);

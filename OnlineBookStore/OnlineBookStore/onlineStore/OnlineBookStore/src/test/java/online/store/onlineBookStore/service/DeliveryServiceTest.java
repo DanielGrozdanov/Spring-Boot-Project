@@ -23,6 +23,7 @@ import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -84,6 +85,28 @@ public class DeliveryServiceTest {
         assertThat(delivery1.getPerson()).isEqualTo(delivery.getPerson());
     }
 
+    @Test
+    public void findById() throws Exception {
+        Delivery delivery = new Delivery();
+        delivery.setPerson("Person");
+        delivery.setCountry("SomeCountry");
+        delivery.setPhone("+359222222222");
+        delivery.setEmail("personEmail@gmai.com");
+        delivery.setCity("PersonCity");
+        delivery.setAddress("PersonAddress");
+        delivery.setPostalCode("2345");
+        delivery.setCourier("Courier");
+        delivery.setUser(testUser);
+        List<Order> orderList = new ArrayList<>();
+        delivery.setOrders(orderList);
+        this.deliveryService.saveToDB(delivery);
+
+        when(deliveryRepository.findById(delivery.getId())).thenReturn(Optional.of(delivery));
+
+        String current = deliveryService.findById(delivery.getId());
+
+        Assertions.assertEquals(current,delivery.getCourier());
+    }
 
     @Test
     public void findByUser() {

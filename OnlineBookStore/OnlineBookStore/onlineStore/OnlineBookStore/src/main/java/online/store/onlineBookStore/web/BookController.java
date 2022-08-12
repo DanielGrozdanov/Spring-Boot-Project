@@ -1,7 +1,6 @@
 package online.store.onlineBookStore.web;
 
 
-import online.store.onlineBookStore.enums.RoleEnum;
 import online.store.onlineBookStore.models.entities.CartBooks;
 import online.store.onlineBookStore.models.entities.Book;
 import online.store.onlineBookStore.models.entities.Cart;
@@ -11,7 +10,7 @@ import online.store.onlineBookStore.services.BookService;
 import online.store.onlineBookStore.services.CartBookService;
 import online.store.onlineBookStore.services.CartService;
 import online.store.onlineBookStore.services.UserService;
-import online.store.onlineBookStore.viewModel.BookViewModel;
+import online.store.onlineBookStore.models.viewmodel.BookViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

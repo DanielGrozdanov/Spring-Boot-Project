@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Orders List</title>
+    <th:block th:include="~{fragments/header}"/>
+    <link rel="stylesheet" href="/css/home.css"/>
+    <link rel="stylesheet" href="/css/orders-list.css"/>
+    <link rel="stylesheet" href="/css/book.css"/>
+</head>
+<div style="z-index: 999;" >
+    <nav  th:replace="~{fragments/navigation}">Navigation</nav>
+</div>
+<body class="background-image">
+
+<main class="p-5 align-content-center bg-blur my-main">
+    <div class="row" style="justify-content: space-around;width: 100%">
+        <div th:each="order :${orderViewModelList}" th:object="${order}" class="book-container">
+            <div class="card mb-4 box-shadow order" style="top:20px">
+                <img src="/images/cart-order.jpg" class="card-img-top" alt="Order Picture"
+                     data-holder-rendered="true"
+                     style="width: 132%; display: block; border: solid 2px;border-radius: 13px">
+                <div class="card-body" style="width: 133%;background-color: #302e2e;border-radius: 13px">
+                    <h1 style="font-size: 22px; text-align: center;color: white">Order Details:</h1>
+                    <div class="panel">
+                        <p style="font-weight: bold;color: white;" class="card-text border-bottom sb">Order Number:  <span th:text="*{id}"></span> </p>
+                        <p style="font-weight: bold;color: white;" class="card-text border-bottom sb">Client:  <span th:text="*{client}"></span> </p>
+                        <p style="color: white;" class="card-text border-bottom sb">Payment: <span th:text="*{payment}"></span></p>
+                        <p style="color: white;" class="card-text border-bottom sb">Delivery: <span th:text="*{delivery}"></span></p>
+                        <p style="color: white;" class="card-text border-bottom sb">Total Price: <span th:text="*{totalPrice}"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<header class="container-fluid main styled" id="showcase">
+</header>
+
+<div class="spacer"></div>
+</body>
+<th:block th:include="~{fragments/footer}"/>
+</html>

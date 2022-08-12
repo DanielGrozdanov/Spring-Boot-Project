@@ -1,7 +1,7 @@
 package online.store.onlineBookStore.services;
 
 import online.store.onlineBookStore.models.entities.User;
-import online.store.onlineBookStore.models.entities.serviceModels.PaymentMethodInfoServiceModel;
+import online.store.onlineBookStore.models.servicemodels.PaymentMethodInfoServiceModel;
 import online.store.onlineBookStore.models.entities.PaymentMethod;
 import online.store.onlineBookStore.repositories.PaymentMethodRepository;
 import org.modelmapper.ModelMapper;
@@ -41,5 +41,10 @@ public class PaymentMethodService {
 
     public void purgePaymentMethodTable() {
         this.paymentMethodRepository.deleteAll();
+    }
+
+    public String findById(Long id) throws Exception {
+        PaymentMethod paymentMethod = this.paymentMethodRepository.findById(id).orElseThrow(Exception::new);
+        return paymentMethod.getPaymentType();
     }
 }

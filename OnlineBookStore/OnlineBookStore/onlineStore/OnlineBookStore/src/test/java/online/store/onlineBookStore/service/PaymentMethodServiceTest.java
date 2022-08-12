@@ -4,8 +4,7 @@ package online.store.onlineBookStore.service;
 import online.store.onlineBookStore.enums.GenderEnum;
 import online.store.onlineBookStore.enums.RoleEnum;
 import online.store.onlineBookStore.models.entities.*;
-import online.store.onlineBookStore.models.entities.dtos.DeliveryDTO;
-import online.store.onlineBookStore.models.entities.serviceModels.PaymentMethodInfoServiceModel;
+import online.store.onlineBookStore.models.servicemodels.PaymentMethodInfoServiceModel;
 import online.store.onlineBookStore.repositories.PaymentMethodRepository;
 import online.store.onlineBookStore.services.PaymentMethodService;
 import org.junit.jupiter.api.Assertions;
@@ -19,6 +18,7 @@ import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -29,7 +29,7 @@ public class PaymentMethodServiceTest {
 
     @Mock
     private PaymentMethodRepository paymentMethodRepository;
-
+    PaymentMethod paymentMethod = new PaymentMethod();
     @Mock
     private PaymentMethodService paymentMethodService;
     private ModelMapper modelMapper;
@@ -78,6 +78,27 @@ public class PaymentMethodServiceTest {
         Assertions.assertEquals(current.getPaymentType(), paymentMethod.getPaymentType());
     }
 
+
+    @Test
+    public void findById() throws Exception {
+        PaymentMethodInfoServiceModel paymentMethodInfoServiceModel = new PaymentMethodInfoServiceModel();
+        User testUser = this.testUser;
+        paymentMethodInfoServiceModel.setPaymentType("Credit Card1");
+        paymentMethodInfoServiceModel.setCardNumber("2222 3333 4444 1111");
+        paymentMethodInfoServiceModel.setExpiryMonth("October");
+        paymentMethodInfoServiceModel.setExpiryYear(2031);
+        paymentMethodInfoServiceModel.setOwner("OwnerOwner");
+        List<Order> orderList = new ArrayList<>();
+        paymentMethodInfoServiceModel.setOrder(orderList);
+        PaymentMethod paymentMethod1 = paymentMethodService.saveToDB(paymentMethodInfoServiceModel, testUser);
+
+        when(paymentMethodRepository.findById(paymentMethod1.getId())).thenReturn(Optional.of(paymentMethod1));
+
+        String current = paymentMethodService.findById(paymentMethod1.getId());
+        Assertions.assertEquals(current,paymentMethod1.getPaymentType());
+    }
+
+
     @Test
     public void findByUser() {
         PaymentMethodInfoServiceModel paymentMethod = new PaymentMethodInfoServiceModel();
@@ -99,6 +120,7 @@ public class PaymentMethodServiceTest {
 
         Assertions.assertEquals(byUser.getCvc(), paymentMethod.getCvc());
     }
+
 
     @Test
     void purgeTable() {

@@ -11,7 +11,7 @@ import online.store.onlineBookStore.repositories.BookRepository;
 import online.store.onlineBookStore.services.AuthorService;
 import online.store.onlineBookStore.services.BookService;
 import online.store.onlineBookStore.services.CategoryService;
-import online.store.onlineBookStore.viewModel.BookViewModel;
+import online.store.onlineBookStore.models.viewmodel.BookViewModel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -74,6 +74,7 @@ class BookServiceTest {
         book.setIsbn("090804940");
         book.setStock(12);
         book.setAuthor(author);
+
     }
 
     @Test
@@ -114,6 +115,21 @@ class BookServiceTest {
 
         Assertions.assertEquals(book1.getTitle(), book.getTitle());
     }
+
+    @Test
+    public void findBookModel() {
+        when(bookRepository.findById(book.getId())).thenReturn(Optional.of(book));
+
+
+        Book bookInDB = bookService.findBookById(book.getId());
+
+        BookViewModel byId = bookService.findById(bookInDB.getId());
+        BookViewModel map = this.modelMapper.map(bookInDB, BookViewModel.class);
+
+        Assertions.assertEquals(byId.getTitle(), map.getTitle());
+
+    }
+
     @Test
     public void deleteBookById() {
         bookRepository.saveAndFlush(book);

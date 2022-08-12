@@ -7,6 +7,7 @@ import online.store.onlineBookStore.repositories.BookRepository;
 import online.store.onlineBookStore.repositories.CartBooksRepository;
 import online.store.onlineBookStore.repositories.CartRepository;
 import online.store.onlineBookStore.repositories.OrderRepository;
+import online.store.onlineBookStore.models.viewmodel.OrderViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -35,7 +37,7 @@ public class OrderService {
     public OrderService(UserService userService, OrderRepository orderRepository
             , PaymentMethodService paymentMethodService1,
                         DeliveryService deliveryService, BookRepository bookRepository, CartRepository cartRepository,
-                        CartService cartService , CartBooksRepository cartBooksRepository) {
+                        CartService cartService, CartBooksRepository cartBooksRepository) {
         this.userService = userService;
         this.orderRepository = orderRepository;
         this.paymentMethodService = paymentMethodService1;
@@ -57,15 +59,15 @@ public class OrderService {
         Cart currentCart = this.cartService.validateCart(loggedUser);
         Set<CartBooks> cart = currentCart.getCart();
 
-        if (cart.size() == 0){
+        if (cart.size() == 0) {
             throw new Exception("Cart is empty!!");
         }
 
 
-        for (CartBooks cartBooks :cart) {
+        for (CartBooks cartBooks : cart) {
             Integer amount = cartBooks.getAmount();
 
-            if (cartBooks.getBook().getStock() == 0){
+            if (cartBooks.getBook().getStock() == 0) {
                 throw new Exception("Book out of stock");
             }
             BigDecimal price = cartBooks.getBook().getPrice();
@@ -84,14 +86,12 @@ public class OrderService {
         order.setDelivery(deliveryService.findByUser(loggedUser));
 
 
-
         order.setBooks(cartBooksList);
         order.setTotalValue(BigDecimal.valueOf(totalAmount));
         User user = this.userService.findByUsername(principal.getName());
         order.setClient(user);
         return order;
     }
-
 
 
     public void save(Order order) {
@@ -131,7 +131,7 @@ public class OrderService {
                     .append(System.lineSeparator())
                     .append("%  #Total Price:").append(order.getTotalValue().doubleValue()).append("€")
                     .append(System.lineSeparator())
-                    .append("%--------------------------------------" )
+                    .append("%--------------------------------------")
                     .append(System.lineSeparator())
                     .append("%  #Client :").append(order.getClient().getFirstName()).append(" ")
                     .append(order.getClient().getLastName())
@@ -189,8 +189,27 @@ public class OrderService {
         }
     }
 
+
     public void purgeOrdersTable() {
         this.orderRepository.deleteAll();
     }
 
+    public List<OrderViewModel> findOrder() {
+        List<Order> orders = this.orderRepository.findAll();
+      return orders.stream().map(this::viewModel).collect(Collectors.toList());
+
+    }
+    private OrderViewModel viewModel(Order order) {
+        try {
+            OrderViewModel orderViewModel = new OrderViewModel();
+            orderViewModel.setClient(this.userService.findById(order.getClient().getId()));
+            orderViewModel.setDelivery(this.deliveryService.findById(order.getDelivery().getId()));
+            orderViewModel.setPayment(this.paymentMethodService.findById(order.getPaymentMethod().getId()));
+            orderViewModel.setTotalPrice(order.getTotalValue());
+            orderViewModel.setId(order.getId());
+            return orderViewModel;
+        } catch (Exception e) {
+            throw new Error(e.getMessage());
+        }
+    }
 }

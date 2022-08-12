@@ -7,6 +7,7 @@ import online.store.onlineBookStore.repositories.DeliveryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DeliveryService {
@@ -29,5 +30,10 @@ public class DeliveryService {
 
     public void purgeDeliveryInformationTable() {
         this.deliveryRepository.deleteAll();
+    }
+
+    public String findById(Long id) throws Exception {
+        Delivery delivery = this.deliveryRepository.findById(id).orElseThrow(Exception::new);
+        return delivery.getCourier();
     }
 }

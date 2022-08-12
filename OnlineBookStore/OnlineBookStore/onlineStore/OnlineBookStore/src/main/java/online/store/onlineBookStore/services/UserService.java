@@ -6,8 +6,8 @@ import online.store.onlineBookStore.enums.RoleEnum;
 import online.store.onlineBookStore.models.entities.User;
 import online.store.onlineBookStore.enums.GenderEnum;
 import online.store.onlineBookStore.repositories.UserRepository;
-import online.store.onlineBookStore.models.entities.serviceModels.UserRegServiceModel;
-import online.store.onlineBookStore.viewModel.UserViewModel;
+import online.store.onlineBookStore.models.servicemodels.UserRegServiceModel;
+import online.store.onlineBookStore.models.viewmodel.UserViewModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -139,5 +139,10 @@ public class UserService {
         }else {
            throw new UsernameNotFoundException("User not found!");
         }
+    }
+
+    public String findById(Long id) throws Exception {
+        User user = this.userRepository.findById(id).orElseThrow(Exception::new);
+        return user.getUsername();
     }
 }

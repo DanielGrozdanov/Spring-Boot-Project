@@ -5,7 +5,7 @@ import online.store.onlineBookStore.models.entities.Book;
 import online.store.onlineBookStore.models.entities.dtos.BookDTO;
 import online.store.onlineBookStore.enums.CategoryEnum;
 import online.store.onlineBookStore.repositories.BookRepository;
-import online.store.onlineBookStore.viewModel.BookViewModel;
+import online.store.onlineBookStore.models.viewmodel.BookViewModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 

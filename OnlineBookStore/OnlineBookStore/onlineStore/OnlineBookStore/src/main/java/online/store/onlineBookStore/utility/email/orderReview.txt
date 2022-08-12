@@ -1,0 +1,36 @@
+
+  #Order number :3
+%  #Total Price:54.980000000000004€
+%--------------------------------------
+%  #Client :Даниел Грозданов
+%  #Client phone number:+359877290700
+%  #Client email:dani.grozdanov@gmail.com
+%--------------------------------------
+%  #Ordered books :
+
+%  #Book name :  The Call of Cthulhu
+%  #Book price : 39.99
+%  #Author :  H.P Lovecraft
+%  #Amount of books : 1
+
+%  #Book name :  The Righteous Mind
+%  #Book price : 14.99
+%  #Author :  Jonathan Haidt
+%  #Amount of books : 1
+
+%--------------------------------------
+
+%  #Payment Type:Credit Card
+%  #Payment information : 
+%  #Card Number :2222 3333 4444 5555
+%  #Month Of Expiration :09
+%  #Year Of Expiration : 26
+%  #Card Owner : Daniel Voidov
+
+%--------------------------------------
+%  #Delivery information :
+%  #Country :Bulgaria
+%  #City :Samokov
+%  #Address:gooo.ds@abv.bg
+%  #Phone :+35986467283
+%  #Email :dani.grozdanov@gmail.com%  #Courier :FedEx

@@ -24,7 +24,7 @@
                     </li>
                     <li class="nav-item">
                         <form th:action="@{/users/logout}" th:method="post">
-                            <input style="margin: -2px;background-color: black; border-radius: 4px; border: solid;
+                            <input style="margin: -2px;background-color: black; border-radius: 16px;
                             display: inline-block; text-align: center;width: 200px; height: 53px; font-size: 23px;"
                                    class="btn btn-link nav-link a" type="submit" value="Logout"></form>
                     </li>
@@ -42,25 +42,30 @@
                         </div>
                     </li>
                     <li class="nav-item " sec:authorize="hasRole('NoRole')">
-                        <a class="nav-link" style="width: 113%" th:href="@{/payments/payment-information}">Payment Information</a>
+                        <a class="nav-link" style="width: 113%" th:href="@{/payments/payment-information}">Payment
+                            Information</a>
                     </li>
                     <li class="nav-item " sec:authorize="hasRole('ROLE_ADMIN')">
                         <a class="nav-link b" style="width: 111%" th:href="@{/admin/book-add}">Add Book to Database</a>
                     </li>
                     <li class="nav-item " sec:authorize="hasRole('ROLE_ADMIN')">
-                        <a class="nav-link b"  style="width: 120%"th:href="@{/admin/all-users}">All Users</a>
+                        <a class="nav-link b" style="width: 120%" th:href="@{/admin/all-users}">All Users</a>
                     </li>
                     <li class="nav-item " sec:authorize="hasRole('NoRole')">
-                        <a class="nav-link b" style="width: 120%" th:href="@{/deliveries/delivery-information}">Delivery Details</a>
+                        <a class="nav-link b" style="width: 120%" th:href="@{/deliveries/delivery-information}">Delivery
+                            Details</a>
                     </li>
                     <li class="nav-item ">
                         <a class="nav-link b" style="width: 120%" th:href="@{/books/view/all}">All books</a>
                     </li>
-                    <li class="nav-item ">
+                    <li class="nav-item" >
                         <a class="nav-link" style="width: 120%" th:href="@{/books/cart}">Cart</a>
                     </li>
                     <li class="nav-item a" sec:authorize="isAuthenticated()">
-                        <a class="nav-link" style="width: 120%"th:href="@{/users/profile}">Profile</a>
+                        <a class="nav-link" style="width: 120%" th:href="@{/users/profile}">Profile</a>
+                    </li>
+                    <li class="nav-item a" sec:authorize="hasRole('ROLE_ADMIN')">
+                        <a class="nav-link" style="width: 120%" th:href="@{/admin/orders-list}">Orders</a>
                     </li>
                 </th:block>
 

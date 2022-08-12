@@ -35,18 +35,18 @@ public class PurgeDataBaseScheduler {
         LOGGER.info("Cart database maintenance completed.");
     }
 
-    @Scheduled(cron = "01 32 03 * * *")
+    @Scheduled(cron = "03 30 03 * * *")
     public void purgeOrderDataBase(){
         this.orderService.purgeOrdersTable();
         LOGGER.info("Orders database maintenance completed.");
     }
 
-    @Scheduled(cron = "01 34 03 * * *")
+    @Scheduled(cron = "06 30 03 * * *")
     public void purgeDeliveryDataBase(){
         this.deliveryService.purgeDeliveryInformationTable();
         LOGGER.info("Delivery information database maintenance completed.");
     }
-    @Scheduled(cron = "01 36 03 * * *")
+    @Scheduled(cron = "08 30 03 * * *")
     public void purgePayMenMethodDataBase(){
         this.paymentMethodService.purgePaymentMethodTable();
         LOGGER.info("Payment Method database maintenance completed.");

@@ -85,6 +85,12 @@ public class AdminControllerTest {
 
     @WithMockUser(username = "TestAdmin", roles = "ADMIN")
     @Test
+    public void allOrders() throws Exception {
+        mockMvc.perform(get("/admin/orders-list")).andExpect(status().is(200));
+    }
+
+    @WithMockUser(username = "TestAdmin", roles = "ADMIN")
+    @Test
     public void searchUserPage() throws Exception {
         mockMvc.perform(get("/admin/all-users/search")).andExpect(status().is(200));
     }

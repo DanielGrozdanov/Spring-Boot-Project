@@ -1,13 +1,11 @@
 
 package online.store.onlineBookStore.web;
 
-import online.store.onlineBookStore.enums.RoleEnum;
 import online.store.onlineBookStore.models.entities.Delivery;
 import online.store.onlineBookStore.models.entities.Order;
 import online.store.onlineBookStore.models.entities.PaymentMethod;
 import online.store.onlineBookStore.models.entities.User;
-import online.store.onlineBookStore.models.entities.dtos.DeliveryDTO;
-import online.store.onlineBookStore.models.entities.serviceModels.PaymentMethodInfoServiceModel;
+import online.store.onlineBookStore.models.servicemodels.PaymentMethodInfoServiceModel;
 import online.store.onlineBookStore.models.entities.dtos.PaymentMethodDTO;
 
 import online.store.onlineBookStore.services.*;

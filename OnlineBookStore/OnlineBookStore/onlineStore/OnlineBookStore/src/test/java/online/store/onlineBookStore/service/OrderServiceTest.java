@@ -4,9 +4,11 @@ import online.store.onlineBookStore.models.entities.Delivery;
 import online.store.onlineBookStore.models.entities.Order;
 import online.store.onlineBookStore.models.entities.PaymentMethod;
 import online.store.onlineBookStore.models.entities.User;
+import online.store.onlineBookStore.models.viewmodel.OrderViewModel;
 import online.store.onlineBookStore.repositories.*;
 import online.store.onlineBookStore.services.*;
 import org.aspectj.weaver.ast.Or;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -110,6 +112,12 @@ public class OrderServiceTest {
         Order order1 = orderArgumentCaptor.getValue();
         assertThat(order1.getTotalValue()).isEqualTo(order.getTotalValue());
 
+    }
+
+    @Test
+    void findOrder() {
+        orderService.findOrder();
+        verify(orderRepository).findAll();
     }
 
     @Test

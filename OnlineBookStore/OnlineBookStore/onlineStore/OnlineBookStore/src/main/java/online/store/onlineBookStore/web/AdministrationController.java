@@ -2,10 +2,12 @@ package online.store.onlineBookStore.web;
 
 import online.store.onlineBookStore.models.entities.dtos.AuthorDTO;
 import online.store.onlineBookStore.models.entities.dtos.BookDTO;
+import online.store.onlineBookStore.models.viewmodel.OrderViewModel;
 import online.store.onlineBookStore.services.BookService;
+import online.store.onlineBookStore.services.OrderService;
 import online.store.onlineBookStore.services.UserService;
-import online.store.onlineBookStore.viewModel.BookViewModel;
-import online.store.onlineBookStore.viewModel.UserViewModel;
+import online.store.onlineBookStore.models.viewmodel.BookViewModel;
+import online.store.onlineBookStore.models.viewmodel.UserViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -23,11 +25,13 @@ public class AdministrationController {
 
     private final UserService userService;
     private final BookService bookService;
+    private final OrderService orderService;
 
     @Autowired
-    public AdministrationController(UserService userService, BookService bookService) {
+    public AdministrationController(UserService userService, BookService bookService, OrderService orderService) {
         this.userService = userService;
         this.bookService = bookService;
+        this.orderService = orderService;
     }
 
 
@@ -101,7 +105,12 @@ public class AdministrationController {
         return "all-users";
     }
 
-    //TODO : must create view all orders made by user through admin POV.
+    @GetMapping("/orders-list")
+    public String ordersList(Model model){
+        List<OrderViewModel> orderViewModelList = this.orderService.findOrder();
+        model.addAttribute("orderViewModelList", orderViewModelList);
+        return "orders-list";
+    }
 
     @GetMapping("/all-users/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
@@ -123,6 +132,7 @@ public class AdministrationController {
         model.addAttribute("keyword", keyword);
         return "all-users";
     }
+
 
 
     @ModelAttribute("bookDTO")

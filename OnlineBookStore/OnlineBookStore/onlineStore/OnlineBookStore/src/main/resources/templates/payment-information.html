@@ -25,7 +25,7 @@
 
                     <div class="col-50">
                         <h3 style="text-align: center">Payment Information</h3>
-                        <label>Accepted Cards</label>
+                        <label style="font-size: 30px;">Accepted Cards</label>
                         <div class="icon-container">
                             <i class="fa fa-cc-visa" style="color:navy;"></i>
                             <i class="fa fa-cc-amex" style="color:blue;"></i>
@@ -126,6 +126,9 @@
                         </div>
                     </div>
                 <input type="submit" value="Finalize Order" class="btn">
+                <div>
+                    <a th:href="@{/books/view/all}" class="btn"> Cancel Order</a>
+                </div>
             </form>
         </div>
     </div>

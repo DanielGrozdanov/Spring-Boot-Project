@@ -10,8 +10,7 @@ import online.store.onlineBookStore.repositories.UserRepository;
 import online.store.onlineBookStore.services.OnlineBookStoreDetailsService;
 import online.store.onlineBookStore.services.RoleService;
 import online.store.onlineBookStore.services.UserService;
-import online.store.onlineBookStore.viewModel.BookViewModel;
-import online.store.onlineBookStore.viewModel.UserViewModel;
+import online.store.onlineBookStore.models.viewmodel.UserViewModel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -104,8 +103,17 @@ public class UserServiceTest {
     }
 
     @Test
+    public void findUserById() throws Exception {
+        when(testUserRepository.findById(testUser.getId())).thenReturn(Optional.of(testUser));
+
+        String byId = this.testUserService.findById(testUser.getId());
+
+        Assertions.assertEquals(byId,testUser.getUsername());
+    }
+
+    @Test
     public void deleteUserTest() {
-        
+
     }
 
     @Test

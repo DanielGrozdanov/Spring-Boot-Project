@@ -122,66 +122,62 @@ public class OrderService {
 
             }
 
-            StringBuilder payment = new StringBuilder(System.lineSeparator());
-            payment.append("%  #Payment Type:").append(order.getPaymentMethod().getPaymentType())
-                    .append(System.lineSeparator());
+            String payment = System.lineSeparator() + "%  #Payment Type:" + order.getPaymentMethod().getPaymentType() +
+                    System.lineSeparator();
 
-            StringBuilder buildOrder = new StringBuilder(System.lineSeparator());
-            buildOrder.append("  #Order number :").append(order.getId())
-                    .append(System.lineSeparator())
-                    .append("%  #Total Price:").append(order.getTotalValue().doubleValue()).append("€")
-                    .append(System.lineSeparator())
-                    .append("%--------------------------------------")
-                    .append(System.lineSeparator())
-                    .append("%  #Client :").append(order.getClient().getFirstName()).append(" ")
-                    .append(order.getClient().getLastName())
-                    .append(System.lineSeparator())
-                    .append("%  #Client phone number:")
-                    .append(order.getClient().getPhoneNumber())
-                    .append(System.lineSeparator())
-                    .append("%  #Client email:")
-                    .append(order.getClient().getEmail())
-                    .append(System.lineSeparator())
-                    .append("%--------------------------------------")
-                    .append(System.lineSeparator())
-                    .append("%  #Ordered books :")
-                    .append(books)
-                    .append(System.lineSeparator())
-                    .append("%--------------------------------------")
-                    .append(System.lineSeparator())
-                    .append(payment)
-                    .append("%  #Payment information : ")
-                    .append(System.lineSeparator())
-                    .append("%  #Card Number :")
-                    .append(order.getPaymentMethod().getCardNumber())
-                    .append(System.lineSeparator())
-                    .append("%  #Month Of Expiration :")
-                    .append(order.getPaymentMethod().getExpiryMonth())
-                    .append(System.lineSeparator())
-                    .append("%  #Year Of Expiration : ")
-                    .append(order.getPaymentMethod().getExpiryYear())
-                    .append(System.lineSeparator())
-                    .append("%  #Card Owner : ")
-                    .append(order.getPaymentMethod().getOwner())
-                    .append(System.lineSeparator())
-                    .append(System.lineSeparator())
-                    .append("%--------------------------------------")
-                    .append(System.lineSeparator())
-                    .append("%  #Delivery information :")
-                    .append(System.lineSeparator())
-                    .append("%  #Country :").append(order.getDelivery().getCountry())
-                    .append(System.lineSeparator())
-                    .append("%  #City :").append(order.getDelivery().getCity())
-                    .append(System.lineSeparator())
-                    .append("%  #Address:").append(order.getDelivery().getAddress())
-                    .append(System.lineSeparator())
-                    .append("%  #Phone :").append(order.getDelivery().getPhone())
-                    .append(System.lineSeparator())
-                    .append("%  #Email :").append(order.getDelivery().getEmail())
-                    .append("%  #Courier :").append(order.getDelivery().getCourier())
-                    .append(System.lineSeparator());
-
-            String finalContent = buildOrder.toString();
+            String finalContent = System.lineSeparator() + "  #Order number :" + order.getId() +
+                    System.lineSeparator() +
+                    "%  #Total Price:" + order.getTotalValue().doubleValue() + "€" +
+                    System.lineSeparator() +
+                    "%--------------------------------------" +
+                    System.lineSeparator() +
+                    "%  #Client :" + order.getClient().getFirstName() + " " +
+                    order.getClient().getLastName() +
+                    System.lineSeparator() +
+                    "%  #Client phone number:" +
+                    order.getClient().getPhoneNumber() +
+                    System.lineSeparator() +
+                    "%  #Client email:" +
+                    order.getClient().getEmail() +
+                    System.lineSeparator() +
+                    "%--------------------------------------" +
+                    System.lineSeparator() +
+                    "%  #Ordered books :" +
+                    books +
+                    System.lineSeparator() +
+                    "%--------------------------------------" +
+                    System.lineSeparator() +
+                    payment +
+                    "%  #Payment information : " +
+                    System.lineSeparator() +
+                    "%  #Card Number :" +
+                    order.getPaymentMethod().getCardNumber() +
+                    System.lineSeparator() +
+                    "%  #Month Of Expiration :" +
+                    order.getPaymentMethod().getExpiryMonth() +
+                    System.lineSeparator() +
+                    "%  #Year Of Expiration : " +
+                    order.getPaymentMethod().getExpiryYear() +
+                    System.lineSeparator() +
+                    "%  #Card Owner : " +
+                    order.getPaymentMethod().getOwner() +
+                    System.lineSeparator() +
+                    System.lineSeparator() +
+                    "%--------------------------------------" +
+                    System.lineSeparator() +
+                    "%  #Delivery information :" +
+                    System.lineSeparator() +
+                    "%  #Country :" + order.getDelivery().getCountry() +
+                    System.lineSeparator() +
+                    "%  #City :" + order.getDelivery().getCity() +
+                    System.lineSeparator() +
+                    "%  #Address:" + order.getDelivery().getAddress() +
+                    System.lineSeparator() +
+                    "%  #Phone :" + order.getDelivery().getPhone() +
+                    System.lineSeparator() +
+                    "%  #Email :" + order.getDelivery().getEmail() +
+                    "%  #Courier :" + order.getDelivery().getCourier() +
+                    System.lineSeparator();
             fw.write(finalContent);
             fw.close();
         } catch (Exception e) {

@@ -50,19 +50,6 @@ public class UserService {
             firstUser.setRole(adminRole);
             this.userRepository.save(firstUser);
 
-            User secondUser = new User();
-            Role userRole = roleService.findByName(RoleEnum.USER);
-            secondUser.setUsername("TheNewbie");
-            secondUser.setFirstName("The");
-            secondUser.setLastName("Newbie");
-            secondUser.setAge(24);
-            secondUser.setEmail("the.newbie@gmail.com");
-            secondUser.setPassword(passwordEncoder.encode("newBieUser"));
-            secondUser.setGender(GenderEnum.MALE);
-            secondUser.setPhoneNumber("+359 344 443");
-            secondUser.setRole(userRole);
-
-            this.userRepository.save(secondUser);
         }
     }
 

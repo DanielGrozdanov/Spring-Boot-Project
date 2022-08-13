@@ -2,7 +2,9 @@
 
 
 
+
 /*
+
 INSERT INTO authors (id ,author_name)
 VALUES (1, 'George R. R. Martin'),
 (2, 'J. R. R. Tolkien'),
@@ -13,6 +15,7 @@ VALUES (1, 'George R. R. Martin'),
 (7, 'Danielle Steel'),
 (8, 'Nora Roberts');
 */
+
 
 
 
@@ -28,8 +31,9 @@ VALUES (1,'A Game of Thrones','1996/8/1','Voyager Books','https://i.ibb.co/ZxGch
 (6,'Yes!: 50 Scientifically Proven Ways to Be Persuasive','2009/12/5','Free Press','https://i.ibb.co/ZTTxP89/Scientifically-Proven-Waysto-Be-Persuasive.jpg',2,'Hard',24.99,'272','1416576142',6,12),
 (7,'Against All Odds','2017/5/2','Delacorte Press','https://i.ibb.co/LYxXzq9/Against-All-Odds.jpg',3,'Soft',32.99,'354','9781101883938',7,13),
 (8,'It Ends with Us','2016/8/2','Atria Books','https://i.ibb.co/pbJPVZs/It-Endswith-Us.png',3,'Hard',24.99,'376','9781501110368',8,15);
-
 */
+
+
 
 
 

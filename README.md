@@ -31,20 +31,24 @@ This page is available when the order is created with the wanted books from the 
 Payment Information - Payment Information View
 Card Details in order for the payment to be done online or on delivery - after the order is Finalized - an email is sent to the user with details about the order.
 
-This application has been build with: 
+**This application has been build with**: 
 
-[Spring Framework]([url](https://spring.io/))
+[Spring Framework](https://spring.io/)
 
 [JUnit5](https://junit.org/junit5//)
 
-[Mockito]([url](https://site.mockito.org/))
+[Mockito](https://site.mockito.org/)
 
-[MySQL]([url](https://www.mysql.com/))
-[Maven]([url](https://maven.apache.org/guides/index.html))
+[MySQL](https://www.mysql.com/)
+
+[Maven](https://maven.apache.org/guides/index.html)
 
 Updates to be done in the future: 
+
 Deployement to a Cloud Database.
+
 Paypal and other payment methods.
+
 Work on some from end pages.
 
  Softuni-Spring-Advanced Project.

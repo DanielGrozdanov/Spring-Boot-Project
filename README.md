@@ -34,8 +34,11 @@ Card Details in order for the payment to be done online or on delivery - after t
 This application has been build with: 
 
 [Spring Framework]([url](https://spring.io/))
-[JUnit5]([url](https://junit.org/junit5//))
+
+[JUnit5](https://junit.org/junit5//)
+
 [Mockito]([url](https://site.mockito.org/))
+
 [MySQL]([url](https://www.mysql.com/))
 [Maven]([url](https://maven.apache.org/guides/index.html))
 
